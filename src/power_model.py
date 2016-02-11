@@ -22,7 +22,7 @@ if __name__=="__main__":
 		# Set temperatures for each (small, big, gpu, mem) (big cluster and GPU are exact; small and mem are approx)
 		# mem die is on top of big core, so they should have approx the same max temp
 		# small core takes average of all temps.
-		T = [0, 0, 0, 0]
+		T = [0.0, 0.0, 0.0, 0.0]
 		# Set temperatures for the small, big, gpu and memory. Convert to kelvin
 		T[0] = sum(t)/len(t)+ 273.15
 		T[1] = max(t[0:4]) 	+ 273.15
@@ -35,13 +35,13 @@ if __name__=="__main__":
 		F[2] = float(cpu_usage.getGPUFreq())
 		F[3] = float(cpu_usage.getMemFreq())*1000
 		# Get voltages for each resource (function returns volts so no conversion necessary):
-		V = [0, 0, 0, 0]
+		V = [0.0, 0.0, 0.0, 0.0]
 		V[0] = cpu_usage.resVoltage(0)
 		V[1] = cpu_usage.resVoltage(4)
 		V[2] = cpu_usage.GPUVoltage()
 		V[3] = cpu_usage.memVoltage()
 		# Now compute the leakage power of each resource
-		Pl = [0, 0, 0, 0]
+		Pl = [0.0, 0.0, 0.0, 0.0]
 		print("Volts: {}".format(V))
 		print("Hz: {}".format(F))
 		print("Temp: {}".format(T))
