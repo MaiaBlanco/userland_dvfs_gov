@@ -51,13 +51,14 @@ def getCpuLoad(n=None, interval=INTERVAL):
 			io_delta =  [y.iowait - x.iowait for x,y in old_and_new]
 			total_delta =  [sum(y) - sum(x) for x,y in old_and_new]
 			loads = [(1-((x+y)/z)) for x,y,z in zip(idle_delta, io_delta, total_delta)]
+			loads = [x if x > 0.001 else 0 for x in loads]
 			return loads
 		else:
 			idle_delta = times[n].idle - old_times[n].idle
 			io_delta = times[n].iowait - old_times[n].iowait
 			total_delta = sum(times[n]) - sum(old_times[n])
 			load = 1-((idle_delta + io_delta)/total_delta)
-			return load
+			return (load if load > 0.001 else 0)
 #	loads = [x/100 for x in psutil.cpu_percent(interval=INTERVAL, percpu=True)]
 #	if n > -1:
 #		return loads[n]

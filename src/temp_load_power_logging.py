@@ -30,13 +30,13 @@ def getTelnetPower(SP2_tel, last_power):
 	return total_power
 
 # Time to wait between logging a line in ms (target, not guaranteed)
-DELAY=0.24
+DELAY=0.2
 # power used by ethernet and wifiusb when active (assuming they are active)
 board_power = 1.71
 peripheral_power = 0.072 + 0.472 + board_power
 out_file = None
 
-header = "time watts w_leak w_dyn w_periph usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem volts_little_cluster volts_big_cluster volts_gpu volts_mem"
+header = "time watts w_leak w_dyn w_periph usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem"# volts_little_cluster volts_big_cluster volts_gpu volts_mem"
 header = "\t".join( header.split(' ') )
 
 def usage():
@@ -119,16 +119,16 @@ if __name__ == "__main__":
 	
 		time_stamp = last_time
 		# Data writeout:
-		fmt_str = "{}\t"*26
+		fmt_str = "{}\t"*22
 		out_ln = fmt_str.format(\
 			time_stamp, total_power, total_leakage_power, total_dynamic_power, peripheral_power,\
 			usages[0], usages[1], usages[2], usages[3], \
 			usages[4], usages[5], usages[6], usages[7],\
 			temps[0], temps[1], temps[2], temps[3], temps[4], \
-			F[0], F[1], F[2], F[3],
-			V[0], V[1], V[2], V[3],
+			F[0], F[1], F[2], F[3]#,
+			#V[0], V[1], V[2], V[3],
 			)
-		print(out_ln)
+		#print(out_ln)
 		if not out_file is None:
 			out_file.write(out_ln)
 			out_file.write("\n")
