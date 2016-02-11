@@ -67,6 +67,9 @@ sudo chmod 775 /usr/bin/perf
 
 # make taskset available to students? I think it already is...
 
+# make TA account (odroid) home directory inaccessible to anyone else:
+sudo chmod -R o-rwx /home/odroid 
+
 # Restart
 echo Restarting system. See you shortly!
 sudo reboot
