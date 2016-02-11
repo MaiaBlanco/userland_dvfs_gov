@@ -38,10 +38,14 @@ def getTimeList(n=None):
 	else:
 		with open("/proc/stat", "r") as procs:
 			# Read out the first line which is aggregate usage
-			cpuStats_l = procs.read().split('\n')
+			cpuStats_l = [x for x in procs.read().split('\n') if 'cpu' in x]
 			cpuStats_l = [e.strip().split(' ')[1:] for e in cpuStats_l]
-			columns = cpuStats_l[n+1]
-			return map(int, filter(None, columns))
+			if n == -1:
+				columns = cpuStats_l[1:]
+				return [map(int, filter(None, cpu_row)) for cpu_row in columns]
+			else:
+				columns = cpuStats_l[n+1]
+				return map(int, filter(None, columns))
 
 def deltaTime(interval, n=None):
 	"""
@@ -51,17 +55,32 @@ def deltaTime(interval, n=None):
 	timeList1 = getTimeList(n)	
 	time.sleep(interval)
 	timeList2 = getTimeList(n)
-	return [(t2-t1) for t1, t2 in zip(timeList1, timeList2)]
+	# -1 returns all cpus:
+	if n == -1:
+		all_deltas = []
+		for i in range(len(timeList1)):
+			all_deltas.append(
+			[(t2-t1) for t1, t2 in zip(timeList1[i], timeList2[i])]
+			)		
+		return all_deltas
+	else:
+		return [(t2-t1) for t1, t2 in zip(timeList1, timeList2)]
 
-def getCpuLoad(n=None):
+def getCpuLoad(n=None, interval=INTERVAL):
 	"""
 	Returns the cpu load as a value from the interval [0.0, 1.0]
 	"""
-	dt = list(deltaTime(INTERVAL,n))
-	idle_time = float(dt[3])
-	total_time = sum(dt)
-	load = 1-(idle_time/total_time)
-	return load
+	dt = deltaTime(interval,n)
+	if n > -1:
+		idle_time = float(dt[3])
+		total_time = sum(dt)
+		load = 1-(idle_time/total_time)
+		return load
+	else:
+		idle_times = [float(y[3]) for y in dt]
+		total_times = [sum(y) for y in dt]
+		loads = [(1-(x/y)) for x,y in zip(idle_times, total_times)]
+		return loads
 
 def getAvailFreqs(cpu_num):
 	cluster = (cpu_num//4) * 4
@@ -101,8 +120,17 @@ def setClusterFreq(cluster_num, frequency):
 		# todo: add bounds checking
 		f.write(str(frequency))	
 
+def getTemps():
+	templ = []
+	for i in range(5):
+		temp = float(file(sysfs.fn_thermal_sensor.format(i),'r').readline().strip())/1000
+		templ.append(temp)
+	return templ
+
 def lAvg(l):
 	return float(sum(l))/len(l)
+
+
 
 
 if __name__ == "__main__":

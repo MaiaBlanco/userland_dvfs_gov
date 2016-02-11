@@ -28,4 +28,7 @@ fn_cluster_freq_set=fn_cluster_base+"scaling_setspeed"
 fn_cluster_max_set=fn_cluster_base+"scaling_max_freq"
 fn_cluster_min_set=fn_cluster_base+"scaling_min_freq"
 
-
+# for temperatures:
+fn_thermal_base="/sys/devices/virtual/thermal/thermal_zone{}/"
+fn_thermal_sensor=fn_thermal_base+"temp"
+fn_thermal_type=fn_thermal_base+"type"
