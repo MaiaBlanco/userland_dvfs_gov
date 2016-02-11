@@ -1,0 +1,43 @@
+Available PAPI preset and user defined events plus hardware information.
+--------------------------------------------------------------------------------
+PAPI Version             : 5.5.1.0
+Vendor string and code   : ARM (7)
+Model string and code    : ARMv7 Processor rev 3 (v7l) (3)
+CPU Revision             : 3.000000
+CPUID Info               : Family: 7  Model: 3079  Stepping: 0
+CPU Max Megahertz        : 1400
+CPU Min Megahertz        : 200
+Hdw Threads per core     : 1
+Cores per Socket         : 4
+Sockets                  : 2
+CPUs per Node            : 8
+Total CPUs               : 8
+Running in a VM          : no
+Number Hardware Counters : 4
+Max Multiplex Counters   : 384
+--------------------------------------------------------------------------------
+
+================================================================================
+  PAPI Preset Events
+================================================================================
+    Name        Code    Deriv Description (Note)
+PAPI_L1_DCM  0x80000000  No   Level 1 data cache misses
+PAPI_L1_ICM  0x80000001  No   Level 1 instruction cache misses
+PAPI_L2_DCM  0x80000002  No   Level 2 data cache misses
+PAPI_L2_TCM  0x80000007  No   Level 2 cache misses
+PAPI_TLB_DM  0x80000014  No   Data translation lookaside buffer misses
+PAPI_TLB_IM  0x80000015  No   Instruction translation lookaside buffer misses
+PAPI_HW_INT  0x80000029  No   Hardware interrupts
+PAPI_BR_MSP  0x8000002e  No   Conditional branch instructions mispredicted
+PAPI_TOT_INS 0x80000032  No   Instructions completed
+PAPI_LD_INS  0x80000035  No   Load instructions
+PAPI_SR_INS  0x80000036  No   Store instructions
+PAPI_BR_INS  0x80000037  No   Branch instructions
+PAPI_TOT_CYC 0x8000003b  No   Total cycles
+PAPI_L1_DCA  0x80000040  No   Level 1 data cache accesses
+PAPI_L2_DCA  0x80000041  No   Level 2 data cache accesses
+PAPI_L1_ICA  0x8000004c  No   Level 1 instruction cache accesses
+--------------------------------------------------------------------------------
+Of 16 available events, 0 are derived.
+
+avail.c                                     PASSED
