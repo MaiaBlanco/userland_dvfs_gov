@@ -1,2 +1,0 @@
-KDIR=/usr/src/linux-stable
-obj-m := nothing.o
