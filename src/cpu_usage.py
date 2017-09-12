@@ -111,7 +111,7 @@ def unsetUserSpace():
 		f.write(prev_gov_1)
 
 def getClusterFreq(cluster_num):
-	with open(sysfs.fn_cluster_freq_read.format(cluster_num), 'r') as f:
+	with open(sysfs.fn_cluster_freq_read_cpuinfo.format(cluster_num), 'r') as f:
 		return int(f.read().strip())
 	
 # Accepts frequency in khz as int or string

@@ -11,7 +11,7 @@ out_file = None
 header = "time watts usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem volts_little_cluster volts_big_cluster volts_gpu volts_mem"
 
 def cleanup():
-	cpu_usage.unsetUserSpace()	
+	#cpu_usage.unsetUserSpace()	
 	if out_file is not None:
 		out_file.close()
 
@@ -25,7 +25,7 @@ if __name__ == "__main__":
 		out_file.write("\n")
 	atexit.register(cleanup)
 	# Set userspace governor:
-	cpu_usage.setUserSpace()
+	#cpu_usage.setUserSpace()
 	try:
 		SP2_tel = tel.Telnet("192.168.4.1")
 		print("Getting power measure from SP2.")
