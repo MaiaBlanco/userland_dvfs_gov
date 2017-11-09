@@ -1,0 +1,6 @@
+linux*/
+*.o
+*.ko
+*.symvers
+*.mod.*
+
