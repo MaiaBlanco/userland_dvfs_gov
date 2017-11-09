@@ -1,0 +1,15 @@
+# Note: before trying to compile, you need to have the correct kernel headers:
+# sudo apt-get install linux-headers-$(uname -r)
+#TARGET	:= cpufreq_ondemand_modified
+TARGET	:= hello-1
+WARN	:= -W -Wall -Wstrict-prototypes -Wmissing-prototypes
+#INCLUDE	:= -isystem /lib/modules/`uname -r`/build/include/
+INCLUDE	:= -isystem /usr/src/linux-headers-`uname -r`/include/
+CFLAGS	:= -O2 -DMODULE -D__KERNEL__ ${WARN} ${INCLUDE}
+
+${TARGET}.o: ${TARGET}.c
+
+.PHONY: clean
+
+clean:
+	rm -rf ${TARGET}.o
