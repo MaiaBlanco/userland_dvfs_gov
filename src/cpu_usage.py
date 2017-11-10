@@ -21,7 +21,7 @@ CL1_DN_THRESH = 0.5
 # Sampling rate in steps of microseconds (us)
 FREQ_SAMPLING_RATE = 100
 # Interval for sampling CPU load, in seconds
-INTERVAL = 0.1
+INTERVAL = 0.05
 
 prev_gov_0 = 'ondemand'
 prev_gov_1 = 'ondemand'
@@ -132,16 +132,16 @@ if __name__ == "__main__":
 			new_freq1 = min(2000000, freq1+int(freq1*0.7))
 			setClusterFreq(4, new_freq1)
 		elif max(cl1) < CL1_DN_THRESH:
-			new_freq1 = max(200000, freq1-int(freq1*0.2))
+			new_freq1 = max(20000, freq1-int(freq1*0.2))
 			setClusterFreq(4, new_freq1)
 
-		print('cluster\told_freq\tnew_freq\ttotal_usage')
-		print('low_power\t{}\t{}\t{}'.format(freq0, new_freq0, float(sum(cl0))/len(cl0)))
-		print('high_power\t{}\t{}\t{}'.format(freq1, new_freq1, float(sum(cl1))/len(cl1)))
+		print('cluster\t\told_freq\tnew_freq\ttotal_%\tmax_core_%')
+		print('low_power\t{}\t\t{}\t\t{:.1%}\t{:.1%}'.format(freq0, new_freq0, float(sum(cl0))/len(cl0), max(cl0)))
+		print('high_power\t{}\t\t{}\t\t{:.1%}\t{:.1%}'.format(freq1, new_freq1, float(sum(cl1))/len(cl1), max(cl1)))
 		# todo: use exponential averages over time
 		# todo: take temperature ceiling into account
 		# todo: refactor to improve performance/overhead	
 		#print "Available freqs:\n"
 		#print getAvailFreqs(0)
 		#print getAvailFreqs(4)
-		time.sleep(0.1)
+		time.sleep(0.5)
