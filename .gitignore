@@ -3,4 +3,4 @@ linux*/
 *.ko
 *.symvers
 *.mod.*
-
+*.pyc
