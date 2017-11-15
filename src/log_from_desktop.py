@@ -1,11 +1,23 @@
 import serial
 import sys
 import time
+from platform import system
 
-XU4_SERIAL = '/dev/ttyUSB0'
-SMARTPOWER2_SERIAL = '/dev/ttyUSB1'
+NUM_SAMPLES=6000
+# Note that changing the sample rate is a bit harder than 
+# just changing this value for now since the dependent
+# code on the sp2 and xu4 are running at 10Hz (0.1 s period)
+INTER_SAMPLE_TIME = 0.08
+
+IS_WINDOWS = system().lower() == "windows"
+if (IS_WINDOWS):
+    XU4_SERIAL = 'COM3'
+    SMARTPOWER2_SERIAL='COM4'
+else:
+    XU4_SERIAL = '/dev/ttyUSB0'
+    SMARTPOWER2_SERIAL = '/dev/ttyUSB1'
 BAUD=115200
-logfile='../data/temp_power_load_log.log'
+logfile='../data/temp_power_load_{}.log'
 
 
 try:
@@ -34,12 +46,12 @@ for i in range(4):
     xu4_line = xu4_ser.readline().strip()
     sp2_line = sp2_ser.readline().strip()
 
-
-f = open(logfile, 'w')
-f.write('u0 u1 u2 u3 u4 u5 u6 u7 t0 t1 t2 t3 tgpu v a w\n')
+curr_time = time.strftime("%d-%m-%Y",time.localtime())
+f = open(logfile.format(curr_time), 'w')
+f.write('time u0 u1 u2 u3 u4 u5 u6 u7 t0 t1 t2 t3 tgpu v a w\n')
 i = 0
-data=''
-while i < 100:
+while i < NUM_SAMPLES:
+    data = str(time.time())#''
     char = ''
     while char != '\r':
         char = xu4_ser.read()
@@ -68,9 +80,10 @@ while i < 100:
 #    print(str(i) + ' '+ data, end="")
 #    data.lstrip()
     f.write(data[1:])
-    data = ''
     i += 1
     xu4_ser.reset_input_buffer()
     sp2_ser.reset_input_buffer()
-    time.sleep(0.08)
+    time.sleep(INTER_SAMPLE_TIME)
 f.close()
+xu4_ser.close()
+sp2_ser.close()

@@ -776,11 +776,11 @@ void handler(void)
 
     if (LOG_TO_SERIAL)
     {
-        Serial.print("V:");
+        //Serial.print("V:");
         Serial.print(volt, 3);
-        Serial.print(" A:");
+        Serial.print(" ");
         Serial.print(ampere, 3);
-        Serial.print(" W:");
+        Serial.print(" ");
         Serial.println(watt, 3);
     }
 
