@@ -3,7 +3,7 @@ import sys
 import time
 from platform import system
 
-NUM_SAMPLES=6000
+NUM_SAMPLES=5000
 # Note that changing the sample rate is a bit harder than 
 # just changing this value for now since the dependent
 # code on the sp2 and xu4 are running at 10Hz (0.1 s period)
@@ -48,7 +48,7 @@ for i in range(4):
 
 curr_time = time.strftime("%d-%m-%Y",time.localtime())
 f = open(logfile.format(curr_time), 'w')
-f.write('time u0 u1 u2 u3 u4 u5 u6 u7 t0 t1 t2 t3 tgpu v a w\n')
+f.write('time u0 u1 u2 u3 u4 u5 u6 u7 t0 t1 t2 t3 tgpu clf0 clf4 v a w\n')
 i = 0
 while i < NUM_SAMPLES:
     data = str(time.time())#''
