@@ -31,6 +31,8 @@ if __name__ == "__main__":
 			line += ' ' + str(u)
 		for t in temps:
 			line += ' ' + str(t)
+		line += ' ' + str(cpu_usage.getClusterFreq(0))
+		line += ' ' + str(cpu_usage.getClusterFreq(4))
 		ser.write(line)
 		ser.write('\n\r')
 		time.sleep(DELAY)
