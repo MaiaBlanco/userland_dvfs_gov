@@ -11,8 +11,8 @@ INTER_SAMPLE_TIME = 0.08
 
 IS_WINDOWS = system().lower() == "windows"
 if (IS_WINDOWS):
-    XU4_SERIAL = 'COM3'
-    SMARTPOWER2_SERIAL='COM4'
+    XU4_SERIAL = 'COM4'#'COM3'
+    SMARTPOWER2_SERIAL='COM6'#'COM4'
 else:
     XU4_SERIAL = '/dev/ttyUSB0'
     SMARTPOWER2_SERIAL = '/dev/ttyUSB1'
