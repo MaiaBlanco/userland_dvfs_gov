@@ -34,3 +34,14 @@ fn_cluster_min_set=fn_cluster_base+"scaling_min_freq"
 fn_thermal_base="/sys/devices/virtual/thermal/thermal_zone{}/"
 fn_thermal_sensor=fn_thermal_base+"temp"
 fn_thermal_type=fn_thermal_base+"type"
+
+# For voltages:
+little_cluster_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator.44/"
+little_micro_volts=little_cluster_voltage_base+"microvolts"
+little_max_micro_volts=little_cluster_voltage_base+"max_microvolts"
+little_min_micro_volts=little_cluster_voltage_base+"min_microvolts"
+
+big_cluster_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.40/"
+big_micro_volts=big_cluster_voltage_base+"microvolts"
+big_max_micro_volts=big_cluster_voltage_base+"max_microvolts"
+big_min_micro_volts=big_cluster_voltage_base+"min_microvolts"
