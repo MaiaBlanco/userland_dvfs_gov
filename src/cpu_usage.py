@@ -84,12 +84,12 @@ def getCpuLoad(n=None, interval=INTERVAL):
 
 def getAvailFreqs(cpu_num):
 	cluster = (cpu_num//4) * 4
-	freqs = open(sysfs.fn_core_freq_range.format(cluster)).read().split(' ')
+	freqs = open(sysfs.fn_cluster_freq_range.format(cluster)).read().strip().split(' ')
 	return freqs
 
 def getClusterUsage(cluster_num):
 	with open(sysfs.fn_cluster_cpus.format(cluster_num),'r') as affected_cpus:
-		cpus = [int(x) for x in affected_cpus.read().strip().split(' ')]
+		cpus = [int(x) for x in affected_cpus.read().strip().strip().split(' ')]
 		use = [getCpuLoad(x) for x in cpus]
 		#total_load = sum(use)/float(len(use))
 		return use #total_load
@@ -125,13 +125,28 @@ def getTemps():
 	for i in range(5):
 		temp = float(file(sysfs.fn_thermal_sensor.format(i),'r').readline().strip())/1000
 		templ.append(temp)
+	# Note: on the 5422, cpu temperatures 5 and 7 (big cores 1 and 3, counting from 0)
+	# appear to be swapped.
+	# therefore, swap them back:
+	t1 = temp1[1]
+	temp[1] = temp[3]
+	temp[3] = t1
 	return templ
 
 def lAvg(l):
 	return float(sum(l))/len(l)
 
-
-
+def resVoltage(n):
+	# 0 is little cluster
+	# 4 is big cluster
+	# TODO: add support for GPU and mem voltages.
+	if n == 0:
+		temp = float(file(sysfs.little_micro_volts, 'r').readline().strip())/1000000
+	elif n == 4:
+		temp = float(file(sysfs.big_micro_volts, 'r').readline().strip())/1000000
+	else:
+		raise Exception('Error: {} is not a supported resource ID for voltage.'.format(n))
+	return temp
 
 if __name__ == "__main__":
 	print("Starting userspace cpu frequency governor. Make sure gov is set to userspace!!.")
