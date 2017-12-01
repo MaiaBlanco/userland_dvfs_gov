@@ -45,3 +45,20 @@ big_cluster_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps1
 big_micro_volts=big_cluster_voltage_base+"microvolts"
 big_max_micro_volts=big_cluster_voltage_base+"max_microvolts"
 big_min_micro_volts=big_cluster_voltage_base+"min_microvolts"
+
+
+# Paths for GPU stats:
+gpu_base = "/sys/devices/platform/11800000.mali:/devfreq/11800000.mali:/"
+gpu_freq = gpu_base + "cur_freq"
+# GPU voltage:
+gpu_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.42/"
+gpu_micro_volts = gpu_voltage_base + 'microvolts'
+
+
+# Paths for memory stats:
+# NOTE: on Ubuntu with Linux kernel 4.9, there is no frequency governor for the memory.
+# Memory runs at default frequency of 825000 kHz
+# mem_freq_base = "/sys/class/devfreq/exynos5-devfreq-mif/"
+# mem_freq = mem_freq_base + 
+mem_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.43/"
+mem_micro_volts = gpu_voltage_base + 'microvolts'

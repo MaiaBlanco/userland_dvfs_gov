@@ -120,6 +120,14 @@ def setClusterFreq(cluster_num, frequency):
 		# todo: add bounds checking
 		f.write(str(frequency))	
 
+def getGPUFreq():
+	with open(sysfs.gpu_freq, 'r') as f:
+		return int(f.read().strip()) 
+
+def getMemFreq():
+		# See also in sysfs_paths.py: Linux kernel 4.9 sets mem to const freq (khz)
+		return int(825000)
+
 def getTemps():
 	templ = []
 	for i in range(5):
@@ -147,6 +155,12 @@ def resVoltage(n):
 	else:
 		raise Exception('Error: {} is not a supported resource ID for voltage.'.format(n))
 	return temp
+
+def GPUVoltage():
+	return float(file(sysfs.gpu_micro_volts, 'r').readline().strip())/1000000
+
+def memVoltage():
+	return float(file(sysfs.mem_micro_volts, 'r').readline().strip())/1000000
 
 if __name__ == "__main__":
 	print("Starting userspace cpu frequency governor. Make sure gov is set to userspace!!.")
