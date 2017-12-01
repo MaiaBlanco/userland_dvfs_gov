@@ -1,10 +1,8 @@
 // #include <iostream>
+#include "data.h"
 
 #define INPUTIDX(OPIDX, S, idx) (OPIDX*S + idx)
 #define INPUTSZ(OPSZ, S, K) (K + (OPSZ-1)*S)
-#ifndef DATA_T
-#define DATA_T float
-#endif
 
 
 // For accesses to ARRAY[idx3][idx2][idx1][idx0]
@@ -20,7 +18,7 @@
 			)
 
 // Perform a convolution given the tile data and hyper-parameters
-void ompConvolve(float * input, float * output, float * weights, 
+void ompConvolve(DATA_T * input, DATA_T * output, DATA_T * weights, 
 	int M, int N, int R, int C, int S, int K)
 {
 	int R_ifm = INPUTSZ(R, S, K);
@@ -36,7 +34,7 @@ void ompConvolve(float * input, float * output, float * weights,
 			{
 				for (int ic = 0; ic < C; ic++)
 				{
-					float acc = 0;//ARRAY(output, 0, im, ir, ic, 0, M, R, C);
+					DATA_T acc = 0;//ARRAY(output, 0, im, ir, ic, 0, M, R, C);
 					//#ifdef OMP_COMPILE
 					// #pragma omp parallel reduction(+:acc)
 					// Don't bother with this one... coordination actually slows it down to 

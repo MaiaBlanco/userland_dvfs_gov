@@ -5,13 +5,14 @@
 
 #include "convolve.h"
 #include "net_specs.h"
+#include "data.h"
 
 #define INPUTSZ(OPSZ, S, K) (K + (OPSZ-1)*S)
 #define RANGE (100)
 // Use values from net_spec.h
 #define PARAMS ::hyperparameters
 #define NUM_LAYERS ::num_layers
-#define DATA_T float
+
 
 int main()
 {	
@@ -66,7 +67,7 @@ int main()
 	// Generate random weights:
 	for (int i = 0; i < weights_size; i++)
 	{
-		layer_weights[i] = (((DATA_T)(rand()%RANGE))/RANGE);
+		layer_weights[i] = (((DATA_T)(rand()*SCALE%RANGE))/RANGE);
 	}
 
 	// (Re) calculate the input size for the first layer
@@ -78,7 +79,7 @@ int main()
 	// Generate some random inputs for the first layer:
 	for (int i = 0; i < first_layer_size; i++)
 	{
-		layer_inputs[i] = (((DATA_T)(rand()%RANGE))/RANGE);
+		layer_inputs[i] = (((DATA_T)(rand()*SCALE%RANGE))/RANGE);
 	}
 
 	int input_offset = 0;
