@@ -33,3 +33,4 @@ calculate power usage of each big core and of
 #  * Any frequency increase takes it to the maximum frequency. Frequency reduction
 #  * happens at minimum steps of 5% (default) of current frequency
 #  */
+'''

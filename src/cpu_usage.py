@@ -136,9 +136,9 @@ def getTemps():
 	# Note: on the 5422, cpu temperatures 5 and 7 (big cores 1 and 3, counting from 0)
 	# appear to be swapped.
 	# therefore, swap them back:
-	t1 = temp1[1]
-	temp[1] = temp[3]
-	temp[3] = t1
+	t1 = templ[1]
+	templ[1] = templ[3]
+	templ[3] = t1
 	return templ
 
 def lAvg(l):
