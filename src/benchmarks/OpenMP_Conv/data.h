@@ -1,2 +1,2 @@
-#define DATA_T int
+#define DATA_T float
 #define SCALE 100
