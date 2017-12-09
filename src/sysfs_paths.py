@@ -36,22 +36,22 @@ fn_thermal_sensor=fn_thermal_base+"temp"
 fn_thermal_type=fn_thermal_base+"type"
 
 # For voltages:
-little_cluster_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.44/"
+little_cluster_voltage_base="/sys/devices/platform/pwrseq/subsystem/devices/s2mps11-regulator/regulator/regulator.44/"
 little_micro_volts=little_cluster_voltage_base+"microvolts"
 little_max_micro_volts=little_cluster_voltage_base+"max_microvolts"
 little_min_micro_volts=little_cluster_voltage_base+"min_microvolts"
 
-big_cluster_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.40/"
+big_cluster_voltage_base="/sys/devices/platform/pwrseq/subsystem/devices/s2mps11-regulator/regulator/regulator.40/"
 big_micro_volts=big_cluster_voltage_base+"microvolts"
 big_max_micro_volts=big_cluster_voltage_base+"max_microvolts"
 big_min_micro_volts=big_cluster_voltage_base+"min_microvolts"
 
 
 # Paths for GPU stats:
-gpu_base = "/sys/devices/platform/11800000.mali:/devfreq/11800000.mali:/"
+gpu_base = "/sys/devices/platform/11800000.mali/devfreq/devfreq0/device/devfreq/devfreq0/"
 gpu_freq = gpu_base + "cur_freq"
 # GPU voltage:
-gpu_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.42/"
+gpu_voltage_base="/sys/devices/platform/pwrseq/subsystem/devices/s2mps11-regulator/regulator/regulator.42/"
 gpu_micro_volts = gpu_voltage_base + 'microvolts'
 
 
@@ -60,5 +60,5 @@ gpu_micro_volts = gpu_voltage_base + 'microvolts'
 # Memory runs at default frequency of 825000 kHz
 # mem_freq_base = "/sys/class/devfreq/exynos5-devfreq-mif/"
 # mem_freq = mem_freq_base + 
-mem_voltage_base="/sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.43/"
+mem_voltage_base="/sys/devices/platform/pwrseq/subsystem/devices/s2mps11-regulator/regulator/regulator.43/"
 mem_micro_volts = gpu_voltage_base + 'microvolts'

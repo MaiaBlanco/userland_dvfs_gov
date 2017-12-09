@@ -4,7 +4,8 @@ stop mpdecision
 FNAME=/sys/devices/system/cpu/cpu$1/online
 echo $FNAME
 ONLINE=$(cat $FNAME)
-if [ $ONLINE=="0" ]; then
+echo online: $ONLINE
+if [ $ONLINE==0 ]; then
 	echo Enabling CPU $1
 	echo "1" >  /sys/devices/system/cpu/cpu$1/online
 else

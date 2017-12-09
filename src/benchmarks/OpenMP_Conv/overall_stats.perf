@@ -1,0 +1,230 @@
+Running!
+Allocating flat arrays for inputs, weights, and outputs.
+Size of inputs array is 1099083x4 bytes.
+Size of output array for last layer is 21632x4 bytes.
+Size of weights array is 22547472x4 bytes.
+
+Starting layer 0.
+Layer has hyperparameters:
+Input Feature Maps (N): 3
+Output Feature Maps (M): 48
+Output Row (R): 55
+Output Col (C): 55
+Kernel Filter Dimensions (K): 11
+Stride (S): 4
+Input Row (IR): 227
+Input Col (IC): 227
+
+Input Offset: 0
+Output Offset: 154587
+Weights Offset: 0
+Finished layer 0.
+
+Starting layer 1.
+Layer has hyperparameters:
+Input Feature Maps (N): 48
+Output Feature Maps (M): 128
+Output Row (R): 27
+Output Col (C): 27
+Kernel Filter Dimensions (K): 5
+Stride (S): 1
+Input Row (IR): 31
+Input Col (IC): 31
+
+Input Offset: 154587
+Output Offset: 200715
+Weights Offset: 17424
+Finished layer 1.
+
+Starting layer 2.
+Layer has hyperparameters:
+Input Feature Maps (N): 128
+Output Feature Maps (M): 192
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 3
+Stride (S): 1
+Input Row (IR): 15
+Input Col (IC): 15
+
+Input Offset: 200715
+Output Offset: 229515
+Weights Offset: 171024
+Finished layer 2.
+
+Starting layer 3.
+Layer has hyperparameters:
+Input Feature Maps (N): 192
+Output Feature Maps (M): 192
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 3
+Stride (S): 1
+Input Row (IR): 15
+Input Col (IC): 15
+
+Input Offset: 229515
+Output Offset: 272715
+Weights Offset: 392208
+Finished layer 3.
+
+Starting layer 4.
+Layer has hyperparameters:
+Input Feature Maps (N): 192
+Output Feature Maps (M): 192
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 3
+Stride (S): 1
+Input Row (IR): 15
+Input Col (IC): 15
+
+Input Offset: 272715
+Output Offset: 315915
+Weights Offset: 723984
+Finished layer 4.
+
+Starting layer 5.
+Layer has hyperparameters:
+Input Feature Maps (N): 192
+Output Feature Maps (M): 384
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 5
+Stride (S): 1
+Input Row (IR): 17
+Input Col (IC): 17
+
+Input Offset: 315915
+Output Offset: 371403
+Weights Offset: 1055760
+Finished layer 5.
+
+Starting layer 6.
+Layer has hyperparameters:
+Input Feature Maps (N): 384
+Output Feature Maps (M): 384
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 5
+Stride (S): 1
+Input Row (IR): 17
+Input Col (IC): 17
+
+Input Offset: 371403
+Output Offset: 482379
+Weights Offset: 2898960
+Finished layer 6.
+
+Starting layer 7.
+Layer has hyperparameters:
+Input Feature Maps (N): 384
+Output Feature Maps (M): 384
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 5
+Stride (S): 1
+Input Row (IR): 17
+Input Col (IC): 17
+
+Input Offset: 482379
+Output Offset: 593355
+Weights Offset: 6585360
+Finished layer 7.
+
+Starting layer 8.
+Layer has hyperparameters:
+Input Feature Maps (N): 384
+Output Feature Maps (M): 384
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 5
+Stride (S): 1
+Input Row (IR): 17
+Input Col (IC): 17
+
+Input Offset: 593355
+Output Offset: 704331
+Weights Offset: 10271760
+Finished layer 8.
+
+Starting layer 9.
+Layer has hyperparameters:
+Input Feature Maps (N): 384
+Output Feature Maps (M): 384
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 5
+Stride (S): 1
+Input Row (IR): 17
+Input Col (IC): 17
+
+Input Offset: 704331
+Output Offset: 815307
+Weights Offset: 13958160
+Finished layer 9.
+
+Starting layer 10.
+Layer has hyperparameters:
+Input Feature Maps (N): 384
+Output Feature Maps (M): 384
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 5
+Stride (S): 1
+Input Row (IR): 17
+Input Col (IC): 17
+
+Input Offset: 815307
+Output Offset: 926283
+Weights Offset: 17644560
+Finished layer 10.
+
+Starting layer 11.
+Layer has hyperparameters:
+Input Feature Maps (N): 192
+Output Feature Maps (M): 192
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 3
+Stride (S): 1
+Input Row (IR): 15
+Input Col (IC): 15
+
+Input Offset: 926283
+Output Offset: 969483
+Weights Offset: 21330960
+Finished layer 11.
+
+Starting layer 12.
+Layer has hyperparameters:
+Input Feature Maps (N): 384
+Output Feature Maps (M): 192
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 3
+Stride (S): 1
+Input Row (IR): 15
+Input Col (IC): 15
+
+Input Offset: 969483
+Output Offset: 1055883
+Weights Offset: 21662736
+Finished layer 12.
+
+Starting layer 13.
+Layer has hyperparameters:
+Input Feature Maps (N): 192
+Output Feature Maps (M): 128
+Output Row (R): 13
+Output Col (C): 13
+Kernel Filter Dimensions (K): 3
+Stride (S): 1
+Input Row (IR): 15
+Input Col (IC): 15
+
+Input Offset: 1055883
+Output Offset: 0
+Weights Offset: 22326288
+Finished layer 13.
+

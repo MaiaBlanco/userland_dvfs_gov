@@ -4,3 +4,4 @@ linux*/
 *.symvers
 *.mod.*
 *.pyc
+*.out
