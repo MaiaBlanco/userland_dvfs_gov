@@ -13,7 +13,8 @@ board_power = 1.71
 peripheral_power = 0.072 + 0.472 + board_power
 out_file = None
 
-header = "time watts usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem volts_little_cluster volts_big_cluster volts_gpu volts_mem"
+header = "time watts w_leak w_dyn w_periph usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem volts_little_cluster volts_big_cluster volts_gpu volts_mem"
+header = "\t".join( header.split(' ') )
 
 def cleanup():
 	#cpu_usage.unsetUserSpace()	
