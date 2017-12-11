@@ -11,7 +11,11 @@ http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/CHDHHAJF.ht
 */
 
 #include <stdio.h>
+#include <unistd.h>
 // #include <asm.h>
+
+#define CYCLES 100000000
+unsigned int microseconds = 10000000;
 
 int main()
 {
@@ -24,13 +28,15 @@ int main()
 	float fc = 10.0;
 	
 	printf("Doing float MAC.\n\r");	
-	for (int i = 0; i < 100000000; i++)
+	for (int i = 0; i < CYCLES; i++)
 	{
 		fa += fb * fc;
 	}
-	
+		
+	usleep(microseconds);
+
 	printf("Doing int MAC\n\r");
-	for (int i = 0; i < 100000000; i++)
+	for (int i = 0; i < CYCLES; i++)
 	{
 		a += b * c;
 	}
