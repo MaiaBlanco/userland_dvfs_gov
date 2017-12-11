@@ -22,12 +22,23 @@ int main()
 	float fa = 0.0;
 	float fb = 20.0;
 	float fc = 10.0;
-
+	
+	printf("Doing float MAC.\n\r");	
+	for (int i = 0; i < 100000000; i++)
+	{
+		fa += fb * fc;
+	}
+	
+	printf("Doing int MAC\n\r");
+	for (int i = 0; i < 100000000; i++)
+	{
+		a += b * c;
+	}
 	// __asm__("MOV ")
 
-	__asm__("ADD $a,$b,$c");
+	//__asm__("ADD r1,r2,#100");
 
-	printf("Added! Result is %d\n\r", a);
-
+	//printf("Added! Result is %d\n\r", a);
+	printf("Completed float multiply accumulates.\n\r");
 	return 0;
 }
