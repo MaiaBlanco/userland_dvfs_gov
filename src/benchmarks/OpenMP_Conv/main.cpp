@@ -1,5 +1,7 @@
 #include <stdio.h>
+#ifdef OMP_COMPILE
 #include <omp.h>
+#endif
 #include <stdlib.h>
 #include <sys/time.h>
 
@@ -16,7 +18,10 @@
 
 int main()
 {	
+#ifdef DEBUG
+	printf("Debug output enabled.\n");
 	printf("Running!\n\r");
+#endif
 	// Allocate space for each layer
 	DATA_T * layer_inputs= NULL;
 	DATA_T * final_output = NULL;
@@ -41,22 +46,28 @@ int main()
 							PARAMS[NUM_LAYERS-1][2] * 
 							PARAMS[NUM_LAYERS-1][3];
 	// Allocate some big 'ol arrays (filled with zeroes for the input and output maps)
+#ifdef DEBUG
 	printf("Allocating flat arrays for inputs, weights, and outputs.\n");
 	printf("Size of inputs array is %dx%d bytes.\n", input_size, (int)sizeof(DATA_T));
+#endif
 	layer_inputs = (DATA_T*) calloc(input_size, sizeof(DATA_T));
 	if (layer_inputs == NULL)
 	{
 		fprintf(stderr, "ERROR: could not allocate inputs array.\n");
 		return EXIT_FAILURE;
 	}
+#ifdef DEBUG
 	printf("Size of output array for last layer is %dx%d bytes.\n", final_output_size, (int)sizeof(DATA_T));
+#endif
 	final_output = (DATA_T*) calloc(final_output_size, sizeof(DATA_T));
 	if (final_output == NULL)
 	{
 		fprintf(stderr, "ERROR: could not allocate output array.\n");
 		return EXIT_FAILURE;
 	}
+#ifdef DEBUG
 	printf("Size of weights array is %dx%d bytes.\n", weights_size, (int)sizeof(DATA_T));
+#endif
 	layer_weights = (DATA_T*) malloc(weights_size * sizeof(DATA_T));
 	if (layer_weights == NULL)
 	{
@@ -88,7 +99,9 @@ int main()
 	// Execute each layer in sequence
 	for (int il = 0; il < NUM_LAYERS; il++)
 	{
+#ifdef DEBUG
 		printf("Starting layer %d.\n\r", il);
+#endif
 		// Num output maps
 		int M = PARAMS[il][1];
 		// Num input maps
@@ -101,6 +114,7 @@ int main()
 		int S = PARAMS[il][5];
 		// Weights size
 		int K = PARAMS[il][4];
+#ifdef DEBUG
 		printf("Layer has hyperparameters:\n");
 		printf("Input Feature Maps (N): %d\n", N);
 		printf("Output Feature Maps (M): %d\n", M);
@@ -108,20 +122,24 @@ int main()
 		printf("Output Col (C): %d\n", C);
 		printf("Kernel Filter Dimensions (K): %d\n", K);
 		printf("Stride (S): %d\n", S);
+#endif
 		// Row and column of current input layer
 		int IR = INPUTSZ(PARAMS[il][2], PARAMS[il][5], PARAMS[il][4]);
 		int IC = INPUTSZ(PARAMS[il][3], PARAMS[il][5], PARAMS[il][4]);
+#ifdef DEBUG
 		printf("Input Row (IR): %d\n", IR);
-		printf("Input Col (IC): %d\n", IC);
-		printf("\n");
+		printf("Input Col (IC): %d\n\n", IC);
+#endif
 
 		// Use the output array for the last layer
 		// else use the input array space
 		if (il == NUM_LAYERS-1)
 		{
+#ifdef DEBUG
 			printf("Input Offset: %d\n", input_offset);
 			printf("Output Offset: %d\n", 0);
 			printf("Weights Offset: %d\n", weight_offset);
+#endif
 			ompConvolve(
 				layer_inputs+input_offset, 
 				final_output, 
@@ -132,9 +150,11 @@ int main()
 			// Output offset is just the size of the current input layer:
 			// (since the size of the current input is the size of the previous output)
 			output_offset = PARAMS[il][0]*IR*IC;
+#ifdef DEBUG
 			printf("Input Offset: %d\n", input_offset);
 			printf("Output Offset: %d\n", input_offset+output_offset);
 			printf("Weights Offset: %d\n", weight_offset);
+#endif
 			ompConvolve(
 				layer_inputs+input_offset, 
 				layer_inputs+input_offset+output_offset, 
@@ -145,8 +165,10 @@ int main()
 		// Weight offset for the next layer is the number of weights for this layer
 		// (number of input time number of output maps times the squared kernel size)
 		weight_offset += PARAMS[il][0] * PARAMS[il][1] * PARAMS[il][4] * PARAMS[il][4];
+#ifdef DEBUG
 		printf("Finished layer %d.\n\r", il);
 		printf("\n");
+#endif
 	}
 	return 0;
 }
