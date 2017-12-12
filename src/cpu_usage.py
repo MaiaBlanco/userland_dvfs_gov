@@ -23,8 +23,7 @@ FREQ_SAMPLING_RATE = 100
 # Interval for sampling CPU load, in seconds
 INTERVAL = 0.05
 
-prev_gov_0 = 'ondemand'
-prev_gov_1 = 'ondemand'
+prev_govs = list()
 
 def getTimeList(n=None):
 	"""
@@ -94,23 +93,41 @@ def getClusterUsage(cluster_num):
 		#total_load = sum(use)/float(len(use))
 		return use #total_load
 		
-def setUserSpace():
-	with open(sysfs.fn_cluster_gov.format(0), 'r') as f:
-		prev_gov_0 = f.readline().strip()
-	with open(sysfs.fn_cluster_gov.format(4), 'r') as f:
-		prev_gov_1 = f.readline().strip()
-	with open(sysfs.fn_cluster_gov.format(0), 'w') as f:
-		f.write('userspace')
-	with open(sysfs.fn_cluster_gov.format(4), 'w') as f:
-		f.write('userspace')
+def setUserSpace(clusters=None):
+	global prev_govs
+	print("Setting userspace")
+	if clusters is None:
+		clusters = [0, 4]
+	elif type(clusters) is int:
+		clusters = [clusters]
+	elif type(clusters) is not list:
+		print("ERROR: input None, int, or list of ints to set/unset userspace function.")
+		sys.exit(1)
+	prev_govs = ['powersave'] * (sorted(clusters)[-1] + 1)
+	for i in clusters:
+		if i != 0 and i != 4:
+			print("ERROR: {} is not a valid cluster number! Integers 0 and 4 are valid.".format(i))
+			sys.exit(1)
+		with open(sysfs.fn_cluster_gov.format(i), 'r') as f:
+			prev_govs[i] = f.readline().strip()
+		with open(sysfs.fn_cluster_gov.format(i), 'w') as f:
+			f.write('userspace')
 
 def unsetUserSpace(clusters=None):
-	if ( cluster is None ):
-		clusters = [0,4]
-		with open(sysfs.fn_cluster_gov.format(0), 'w') as f:
-			f.write(prev_gov_0)
-		with open(sysfs.fn_cluster_gov.format(4), 'w') as f:
-			f.write(prev_gov_1)
+	global prev_govs
+	if clusters is None:
+		clusters = [0, 4]
+	elif type(clusters) is int:
+		clusters = [clusters]
+	elif type(clusters) is not list:
+		print("ERROR: input None, int, or list of ints to set/unset userspace function.")
+		sys.exit(1)
+	for i in clusters:
+		if i != 0 and i != 4:
+			print("ERROR: {} is not a valid cluster number! Integers 0 and 4 are valid.".format(i))
+			sys.exit(1)
+		with open(sysfs.fn_cluster_gov.format(i), 'w') as f:
+			f.write(prev_govs[i])
 	
 
 def getClusterFreq(cluster_num):
