@@ -2,233 +2,293 @@ Found 4 PAPI counters!
 Flops: 1.000000
 rtime: 0.000000
 ptime: 0.000000
+Num cores: 4
+Model: ARMv7 Processor rev 3 (v7l)
+Total CPUs: 8
 Event is available
-Event PAPI_INT_INS is available.
+Event PAPI_INT_INS is not available :( 
 Event description:
 Integer instructions
 Component Index: 0
-Event PAPI_FP_INS is available.
+
+Event PAPI_FP_INS is not available :( 
 Event description:
 Floating point instructions
 Component Index: 0
-Event PAPI_LD_INS is available.
+
+Event PAPI_LD_INS is available. Count = 1.
 Event description:
 Load instructions
 Component Index: 0
-Event PAPI_SR_INS is available.
+
+Event PAPI_SR_INS is available. Count = 1.
 Event description:
 Store instructions
 Component Index: 0
-Event PAPI_BR_INS is available.
+
+Event PAPI_BR_INS is available. Count = 1.
 Event description:
 Branch instructions
 Component Index: 0
-Event PAPI_VEC_INS is available.
+
+Event PAPI_VEC_INS is not available :( 
 Event description:
 Vector/SIMD instructions (could include integer)
 Component Index: 0
-Event PAPI_RES_STL is available.
+
+Event PAPI_RES_STL is not available :( 
 Event description:
 Cycles stalled on any resource
 Component Index: 0
-Event PAPI_FP_STAL is available.
+
+Event PAPI_FP_STAL is not available :( 
 Event description:
 Cycles the FP unit(s) are stalled
 Component Index: 0
-Event PAPI_TOT_CYC is available.
+
+Event PAPI_TOT_CYC is available. Count = 1.
 Event description:
 Total cycles
 Component Index: 0
-Event PAPI_LST_INS is available.
+
+Event PAPI_LST_INS is not available :( 
 Event description:
 Load/store instructions completed
 Component Index: 0
-Event PAPI_SYC_INS is available.
+
+Event PAPI_SYC_INS is not available :( 
 Event description:
 Synchronization instructions completed
 Component Index: 0
-Event PAPI_L1_DCH is available.
+
+Event PAPI_L1_DCH is not available :( 
 Event description:
 Level 1 data cache hits
 Component Index: 0
-Event PAPI_L2_DCH is available.
+
+Event PAPI_L2_DCH is not available :( 
 Event description:
 Level 2 data cache hits
 Component Index: 0
-Event PAPI_L1_DCA is available.
+
+Event PAPI_L1_DCA is available. Count = 1.
 Event description:
 Level 1 data cache accesses
 Component Index: 0
-Event PAPI_L2_DCA is available.
+
+Event PAPI_L2_DCA is available. Count = 1.
 Event description:
 Level 2 data cache accesses
 Component Index: 0
-Event PAPI_L3_DCA is available.
+
+Event PAPI_L3_DCA is not available :( 
 Event description:
 Level 3 data cache accesses
 Component Index: 0
-Event PAPI_L1_DCR is available.
+
+Event PAPI_L1_DCR is not available :( 
 Event description:
 Level 1 data cache reads
 Component Index: 0
-Event PAPI_L2_DCR is available.
+
+Event PAPI_L2_DCR is not available :( 
 Event description:
 Level 2 data cache reads
 Component Index: 0
-Event PAPI_L3_DCR is available.
+
+Event PAPI_L3_DCR is not available :( 
 Event description:
 Level 3 data cache reads
 Component Index: 0
-Event PAPI_L1_DCW is available.
+
+Event PAPI_L1_DCW is not available :( 
 Event description:
 Level 1 data cache writes
 Component Index: 0
-Event PAPI_L2_DCW is available.
+
+Event PAPI_L2_DCW is not available :( 
 Event description:
 Level 2 data cache writes
 Component Index: 0
-Event PAPI_L3_DCW is available.
+
+Event PAPI_L3_DCW is not available :( 
 Event description:
 Level 3 data cache writes
 Component Index: 0
-Event PAPI_L1_ICH is available.
+
+Event PAPI_L1_ICH is not available :( 
 Event description:
 Level 1 instruction cache hits
 Component Index: 0
-Event PAPI_L2_ICH is available.
+
+Event PAPI_L2_ICH is not available :( 
 Event description:
 Level 2 instruction cache hits
 Component Index: 0
-Event PAPI_L3_ICH is available.
+
+Event PAPI_L3_ICH is not available :( 
 Event description:
 Level 3 instruction cache hits
 Component Index: 0
-Event PAPI_L1_ICA is available.
+
+Event PAPI_L1_ICA is available. Count = 1.
 Event description:
 Level 1 instruction cache accesses
 Component Index: 0
-Event PAPI_L2_ICA is available.
+
+Event PAPI_L2_ICA is not available :( 
 Event description:
 Level 2 instruction cache accesses
 Component Index: 0
-Event PAPI_L3_ICA is available.
+
+Event PAPI_L3_ICA is not available :( 
 Event description:
 Level 3 instruction cache accesses
 Component Index: 0
-Event PAPI_L1_ICR is available.
+
+Event PAPI_L1_ICR is not available :( 
 Event description:
 Level 1 instruction cache reads
 Component Index: 0
-Event PAPI_L2_ICR is available.
+
+Event PAPI_L2_ICR is not available :( 
 Event description:
 Level 2 instruction cache reads
 Component Index: 0
-Event PAPI_L3_ICR is available.
+
+Event PAPI_L3_ICR is not available :( 
 Event description:
 Level 3 instruction cache reads
 Component Index: 0
-Event PAPI_L1_ICW is available.
+
+Event PAPI_L1_ICW is not available :( 
 Event description:
 Level 1 instruction cache writes
 Component Index: 0
-Event PAPI_L2_ICW is available.
+
+Event PAPI_L2_ICW is not available :( 
 Event description:
 Level 2 instruction cache writes
 Component Index: 0
-Event PAPI_L3_ICW is available.
+
+Event PAPI_L3_ICW is not available :( 
 Event description:
 Level 3 instruction cache writes
 Component Index: 0
-Event PAPI_L1_TCH is available.
+
+Event PAPI_L1_TCH is not available :( 
 Event description:
 Level 1 total cache hits
 Component Index: 0
-Event PAPI_L2_TCH is available.
+
+Event PAPI_L2_TCH is not available :( 
 Event description:
 Level 2 total cache hits
 Component Index: 0
-Event PAPI_L3_TCH is available.
+
+Event PAPI_L3_TCH is not available :( 
 Event description:
 Level 3 total cache hits
 Component Index: 0
-Event PAPI_L1_TCA is available.
+
+Event PAPI_L1_TCA is not available :( 
 Event description:
 Level 1 total cache accesses
 Component Index: 0
-Event PAPI_L2_TCA is available.
+
+Event PAPI_L2_TCA is not available :( 
 Event description:
 Level 2 total cache accesses
 Component Index: 0
-Event PAPI_L3_TCA is available.
+
+Event PAPI_L3_TCA is not available :( 
 Event description:
 Level 3 total cache accesses
 Component Index: 0
-Event PAPI_L1_TCR is available.
+
+Event PAPI_L1_TCR is not available :( 
 Event description:
 Level 1 total cache reads
 Component Index: 0
-Event PAPI_L2_TCR is available.
+
+Event PAPI_L2_TCR is not available :( 
 Event description:
 Level 2 total cache reads
 Component Index: 0
-Event PAPI_L3_TCR is available.
+
+Event PAPI_L3_TCR is not available :( 
 Event description:
 Level 3 total cache reads
 Component Index: 0
-Event PAPI_L1_TCW is available.
+
+Event PAPI_L1_TCW is not available :( 
 Event description:
 Level 1 total cache writes
 Component Index: 0
-Event PAPI_L2_TCW is available.
+
+Event PAPI_L2_TCW is not available :( 
 Event description:
 Level 2 total cache writes
 Component Index: 0
-Event PAPI_L3_TCW is available.
+
+Event PAPI_L3_TCW is not available :( 
 Event description:
 Level 3 total cache writes
 Component Index: 0
-Event PAPI_FML_INS is available.
+
+Event PAPI_FML_INS is not available :( 
 Event description:
 Floating point multiply instructions
 Component Index: 0
-Event PAPI_FAD_INS is available.
+
+Event PAPI_FAD_INS is not available :( 
 Event description:
 Floating point add instructions
 Component Index: 0
-Event PAPI_FDV_INS is available.
+
+Event PAPI_FDV_INS is not available :( 
 Event description:
 Floating point divide instructions
 Component Index: 0
-Event PAPI_FSQ_INS is available.
+
+Event PAPI_FSQ_INS is not available :( 
 Event description:
 Floating point square root instructions
 Component Index: 0
-Event PAPI_FNV_INS is available.
+
+Event PAPI_FNV_INS is not available :( 
 Event description:
 Floating point inverse instructions
 Component Index: 0
-Event PAPI_FP_OPS is available.
+
+Event PAPI_FP_OPS is not available :( 
 Event description:
 Floating point operations
 Component Index: 0
-Event PAPI_SP_OPS is available.
+
+Event PAPI_SP_OPS is not available :( 
 Event description:
 Floating point operations; optimized to count scaled single precision vector operations
 Component Index: 0
-Event PAPI_DP_OPS is available.
+
+Event PAPI_DP_OPS is not available :( 
 Event description:
 Floating point operations; optimized to count scaled double precision vector operations
 Component Index: 0
-Event PAPI_VEC_SP is available.
+
+Event PAPI_VEC_SP is not available :( 
 Event description:
 Single precision vector/SIMD instructions
 Component Index: 0
-Event PAPI_VEC_DP is available.
+
+Event PAPI_VEC_DP is not available :( 
 Event description:
 Double precision vector/SIMD instructions
 Component Index: 0
-Event PAPI_REF_CYC is available.
+
+Event PAPI_REF_CYC is not available :( 
 Event description:
 Reference clock cycles
 Component Index: 0
+
 There are 57 presets after PAPI_TOT_INS.
