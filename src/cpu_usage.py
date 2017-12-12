@@ -104,11 +104,14 @@ def setUserSpace():
 	with open(sysfs.fn_cluster_gov.format(4), 'w') as f:
 		f.write('userspace')
 
-def unsetUserSpace():
-	with open(sysfs.fn_cluster_gov.format(0), 'w') as f:
-		f.write(prev_gov_0)
-	with open(sysfs.fn_cluster_gov.format(4), 'w') as f:
-		f.write(prev_gov_1)
+def unsetUserSpace(clusters=None):
+	if ( cluster is None ):
+		clusters = [0,4]
+		with open(sysfs.fn_cluster_gov.format(0), 'w') as f:
+			f.write(prev_gov_0)
+		with open(sysfs.fn_cluster_gov.format(4), 'w') as f:
+			f.write(prev_gov_1)
+	
 
 def getClusterFreq(cluster_num):
 	with open(sysfs.fn_cluster_freq_read.format(cluster_num), 'r') as f:
