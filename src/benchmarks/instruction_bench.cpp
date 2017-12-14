@@ -28,7 +28,8 @@ http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/CHDHHAJF.ht
 // #include <asm.h>
 
 // Target number of cycles for each instruction
-#define CYCLES 1000000000
+#define CYCLES 10000
+#define ARRAY_SIZE 100000
 #define MICROSECONDS 10000000
 
 // Namespaces:
@@ -74,12 +75,10 @@ int main()
 
 	// Onto business -- benchmarking.
 	printf("Benchmarking operations...\n\r");
-	int a = 0;
-	int b = 20;
-	int c = 10;
-	float fa = 0.0;
-	float fb = 20.0;
-	float fc = 10.0;
+	int a[ARRAY_SIZE] = {0};
+	int b[ARRAY_SIZE] = {20};
+	float fa[ARRAY_SIZE] = {0.0};
+	float fb[ARRAY_SIZE] = {20.0};
 	
 	printf("Doing float MAC.\n\r");	
 	
@@ -88,10 +87,12 @@ int main()
 	// Start papi counters:
 	if (PAPI_start(event_set) != PAPI_OK)
 		HandlePAPIError(1);
-	
-	for (int i = 0; i < CYCLES; i++)
+	for (unsigned long j = 0; j < CYCLES; j++)
 	{
-		fa += fb * fc;
+		for (unsigned long i = 0; i < ARRAY_SIZE; i++)
+		{
+			fa[i] += fb[i] * fb[i];
+		}
 	}
 
 	if (PAPI_stop(event_set, papi_event_values) != PAPI_OK)
@@ -99,13 +100,12 @@ int main()
 		
 	end = high_resolution_clock::now();
 	elapsed = duration_cast<duration<double>>(end-start);
-	std::cout << "Performed " << CYCLES << " " << sizeof(fa)*8 << "-bit"  << 
+	std::cout << "Performed " << ARRAY_SIZE * CYCLES << " " << sizeof(float)*8 << "-bit" << 
 			" fMAC operations in " << elapsed.count() << " seconds." << std::endl;
-	std::cout << "PAPI recorded " << papi_event_values[0] << " instructions.\n" 
-			<< "This is probably greater than the number of floats and "
-			"may reflect instructions executed on other cores.\n";
-	std::cout << "PAPI recorded " << papi_event_values[1] << " cycles" << std::endl;
+	std::cout << "PAPI instructions: " << papi_event_values[0] << std::endl; 
+	std::cout << "PAPI cycles: " << papi_event_values[1] << std::endl;
 	std::cout << "IPC: " << float(papi_event_values[0])/float(papi_event_values[1]) << std::endl;
+	std::cout << "Overall throughput: " << 2*float(ARRAY_SIZE * CYCLES)/elapsed.count() << " FLOP/s" << std::endl;
 
 
 	if (PAPI_reset(event_set) != PAPI_OK)
@@ -120,9 +120,12 @@ int main()
 	if (PAPI_start(event_set) != PAPI_OK)
 		HandlePAPIError(1);
 	
-	for (int i = 0; i < CYCLES; i++)
+	for (unsigned long j = 0; j < CYCLES; j++)
 	{
-		a += b * c;
+		for (unsigned long i = 0; i < ARRAY_SIZE; i++)
+		{
+			a[i] += b[i] * b[i];
+		}
 	}
 
 	if (PAPI_stop(event_set, papi_event_values) != PAPI_OK)
@@ -130,54 +133,74 @@ int main()
 
 	end = high_resolution_clock::now();
 	elapsed = duration_cast<duration<double>>(end-start);
-	std::cout << "Performed " << CYCLES << " " << sizeof(a)*8 << "-bit" << 
+	std::cout << "Performed " << ARRAY_SIZE * CYCLES << " " << sizeof(int)*8 << "-bit" << 
 			" iMAC operations in " << elapsed.count() << " seconds." << std::endl;
-	std::cout << "That comes to " << float(CYCLES)/elapsed.count() << " instructions per second. Depending on the CPU frequency at this time that means a different number of cycles." << std::endl;
-	std::cout << "PAPI recorded " << papi_event_values[0] << " instructions.\n" 
-			<< "This is probably greater than the number of floats and "
-			"may reflect instructions executed on other cores.\n";
-	std::cout << "PAPI recorded " << papi_event_values[1] << " cycles" << std::endl;
+	std::cout << "PAPI instructions: " << papi_event_values[0] << std::endl; 
+	std::cout << "PAPI cycles: " << papi_event_values[1] << std::endl;
 	std::cout << "IPC: " << float(papi_event_values[0])/float(papi_event_values[1]) << std::endl;
-	// __asm__("MOV ")
+	std::cout << "Overall throughput: " << 2*float(ARRAY_SIZE * CYCLES)/elapsed.count() << " FLIP/s" << std::endl;
 
-	//__asm__("ADD r1,r2,#100");
-
-	//printf("Added! Result is %d\n\r", a);
 	std::cout << "Completed multiply accumulate tests." << std::endl;
 
 	std::cout << "Resting for " << float(MICROSECONDS)/1000000 << " seconds.\n";
 	usleep(MICROSECONDS);
 
-	// Now use PAPI api to do just int and float throughput:
-	float real_time, proc_time, mflips, mflops;
-	long long flpins, ins, ipc; 
-	PAPI_flips(&real_time, &proc_time, &flpins, &mflips);
-	for (int i = 0; i < CYCLES; i++)
+	printf("Doing float ADD\n\r");
+	
+	start = high_resolution_clock::now();
+	
+	if (PAPI_start(event_set) != PAPI_OK)
+		HandlePAPIError(1);
+	
+	for (unsigned long j = 0; j < CYCLES; j++)
 	{
-		a = b+c;
+		for (unsigned long i = 0; i < ARRAY_SIZE; i++)
+		{
+			fa[i] = fb[i] + fb[i];
+		}
 	}
-	PAPI_flips(&real_time, &proc_time, &flpins, &mflips);
-	std::cout << "Operations took " << real_time << " seconds and "
-				<< proc_time << " processor seconds." << std::endl;
-	std::cout << "Integer instructions: " << flpins << "FLIPs" << std::endl;
-	std::cout << "Integer instructions per second: " << mflips*1000000
-				<< "FLIPs/s" << std::endl;
-	std::cout << "Instructions: " << ins << std::endl;
-	std::cout << "IPC: " << ipc << std::endl;
 
-	PAPI_flops(&real_time, &proc_time, &flpins, &mflips);
-	for (int i = 0; i < CYCLES; i++)
+	if (PAPI_stop(event_set, papi_event_values) != PAPI_OK)
+		HandlePAPIError(1);
+
+	end = high_resolution_clock::now();
+	elapsed = duration_cast<duration<double>>(end-start);
+	std::cout << "Performed " << ARRAY_SIZE * CYCLES << " " << sizeof(float)*8 << "-bit" << 
+			" fADD operations in " << elapsed.count() << " seconds." << std::endl;
+	std::cout << "PAPI instructions: " << papi_event_values[0] << std::endl; 
+	std::cout << "PAPI cycles: " << papi_event_values[1] << std::endl;
+	std::cout << "IPC: " << float(papi_event_values[0])/float(papi_event_values[1]) << std::endl;
+	std::cout << "Overall throughput: " << float(ARRAY_SIZE * CYCLES)/elapsed.count() << " FLOP/s" << std::endl;
+	
+	std::cout << "Resting for " << float(MICROSECONDS)/1000000 << " seconds.\n";
+	usleep(MICROSECONDS);
+
+	printf("Doing int ADD\n\r");
+	
+	start = high_resolution_clock::now();
+	
+	if (PAPI_start(event_set) != PAPI_OK)
+		HandlePAPIError(1);
+	
+	for (unsigned long j = 0; j < CYCLES; j++)
 	{
-		fa = fb+fc;
+		for (unsigned long i = 0; i < ARRAY_SIZE; i++)
+		{
+			a[i] = b[i] + b[i];
+		}
 	}
-	PAPI_flips(&real_time, &proc_time, &flpins, &mflips);
-	std::cout << "Operations took " << real_time << " seconds and "
-				<< proc_time << " processor seconds." << std::endl;
-	std::cout << "Float instructions: " << flpins << "FLOPs" << std::endl;
-	std::cout << "Float instructions per second: " << mflips*1000000
-				<< "FLOPs/s" << std::endl;
-	std::cout << "Instructions: " << ins << std::endl;
-	std::cout << "IPC: " << ipc << std::endl;
+
+	if (PAPI_stop(event_set, papi_event_values) != PAPI_OK)
+		HandlePAPIError(1);
+
+	end = high_resolution_clock::now();
+	elapsed = duration_cast<duration<double>>(end-start);
+	std::cout << "Performed " << ARRAY_SIZE * CYCLES << " " << sizeof(int)*8 << "-bit" << 
+			" iADD operations in " << elapsed.count() << " seconds." << std::endl;
+	std::cout << "PAPI instructions: " << papi_event_values[0] << std::endl; 
+	std::cout << "PAPI cycles: " << papi_event_values[1] << std::endl;
+	std::cout << "IPC: " << float(papi_event_values[0])/float(papi_event_values[1]) << std::endl;
+	std::cout << "Overall throughput: " << float(ARRAY_SIZE * CYCLES)/elapsed.count() << " FLIP/s" << std::endl;
 	return 0;
 }
 
