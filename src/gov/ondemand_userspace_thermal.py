@@ -15,6 +15,7 @@ LOAD_TARGET = CLUSTER_UP_THRESH
 FREQ_SAMPLING_RATE = 100
 CLUSTER_SIZE = 4
 REFRESH_PERIOD = 0.1
+MAX_THERMAL_FREQ_INDEX = 0
 
 def usage():
 	print("USAGE: {} [options]", sys.argv[0])
@@ -78,7 +79,7 @@ if __name__ == "__main__":
 													LOAD_TARGET, Fs[cluster])
 				# Search up to and including the current frequency for one that maintains the 
 				# desired load:
-				for index in range(	sel_cluster_freq[cluster] + 1 ):
+				for index in range(	len(avail_freqs[cluster]) ):
 					if avail_freqs[cluster][index] >= Fs_new[cluster]:
 						sel_cluster_freq[cluster] = min(index, MAX_THERMAL_FREQ_INDEX)
 						break
