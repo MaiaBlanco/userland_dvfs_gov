@@ -110,7 +110,7 @@ int main()
 
 	if (PAPI_reset(event_set) != PAPI_OK)
 		HandlePAPIError(1);
-	std::cout << "Resing for " << float(MICROSECONDS)/1000000 << " seconds.\n";
+	std::cout << "Resting for " << float(MICROSECONDS)/1000000 << " seconds.\n";
 	usleep(MICROSECONDS);
 
 	printf("Doing int MAC\n\r");
@@ -145,7 +145,7 @@ int main()
 	//printf("Added! Result is %d\n\r", a);
 	std::cout << "Completed multiply accumulate tests." << std::endl;
 
-	std::cout << "Resing for " << float(MICROSECONDS)/1000000 << " seconds.\n";
+	std::cout << "Resting for " << float(MICROSECONDS)/1000000 << " seconds.\n";
 	usleep(MICROSECONDS);
 
 	// Now use PAPI api to do just int and float throughput:
@@ -157,12 +157,27 @@ int main()
 		a = b+c;
 	}
 	PAPI_flips(&real_time, &proc_time, &flpins, &mflips);
+	std::cout << "Operations took " << real_time << " seconds and "
+				<< proc_time << " processor seconds." << std::endl;
 	std::cout << "Integer instructions: " << flpins << "FLIPs" << std::endl;
 	std::cout << "Integer instructions per second: " << mflips*1000000
 				<< "FLIPs/s" << std::endl;
 	std::cout << "Instructions: " << ins << std::endl;
 	std::cout << "IPC: " << ipc << std::endl;
 
+	PAPI_flops(&real_time, &proc_time, &flpins, &mflips);
+	for (int i = 0; i < CYCLES; i++)
+	{
+		fa = fb+fc;
+	}
+	PAPI_flips(&real_time, &proc_time, &flpins, &mflips);
+	std::cout << "Operations took " << real_time << " seconds and "
+				<< proc_time << " processor seconds." << std::endl;
+	std::cout << "Float instructions: " << flpins << "FLOPs" << std::endl;
+	std::cout << "Float instructions per second: " << mflips*1000000
+				<< "FLOPs/s" << std::endl;
+	std::cout << "Instructions: " << ins << std::endl;
+	std::cout << "IPC: " << ipc << std::endl;
 	return 0;
 }
 
