@@ -34,10 +34,10 @@ echo C1 gov: `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
 echo Avail. Freqs. for Cluster 2:
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
 echo C2 gov: `cat /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor`
-FREQ=`cat /sys/devices/platform/11800000.mali\:/devfreq/11800000.mali\:/cur_freq`
+FREQ=`cat /sys/devices/platform/11800000.mali/devfreq/devfreq0/device/devfreq/devfreq0/cur_freq`
 echo GPU Freq: $FREQ
 
-VDD1=`cat /sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.44/microvolts`
-echo Little Voltage: $VDD1 uVolts
-VDD2=`cat /sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.40/microvolts`
-echo Little Voltage: $VDD2 uVolts
+#VDD1=`cat /sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.44/microvolts`
+#echo Little Voltage: $VDD1 uVolts
+#VDD2=`cat /sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.40/microvolts`
+#echo Little Voltage: $VDD2 uVolts
