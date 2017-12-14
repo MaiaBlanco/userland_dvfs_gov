@@ -82,17 +82,17 @@ int main()
 			if ( info.count > 0 )
 			{
 				printf("Event %s is available. Count = %d.\n", evnt_nm, info.count);
+				printf("Event description:\n");
+				printf("%s\n", info.long_descr);
+				printf("Component Index: %d\n", info.component_index);
+				if ( strcmp( info.derived, "NOT_DERIVED") )
+					printf("Event is a derived one.");
+				printf("\n");
 			} else
 			{
-				printf("Event %s is not available :( \n", evnt_nm);
+			//	printf("Event %s is not available :( \n", evnt_nm);
 			}
-			printf("Event description:\n");
-			printf("%s\n", info.long_descr);
-			printf("Component Index: %d\n", info.component_index);
-			if ( strcmp( info.derived, "NOT_DERIVED") )
-				printf("Event is a derived one.");
 		}
-		printf("\n");
 	}
 
 	printf("There are %d presets after PAPI_TOT_INS.\n", evnt_cntr);
