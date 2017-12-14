@@ -5,6 +5,7 @@ linux*/
 *.mod.*
 *.pyc
 *.out
+*.exe
 *.swo
 *.swp
 ~*.*
