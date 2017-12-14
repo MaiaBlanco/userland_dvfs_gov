@@ -84,7 +84,7 @@ def getCpuLoad(n=None, interval=INTERVAL):
 def getAvailFreqs(cpu_num):
 	cluster = (cpu_num//4) * 4
 	freqs = open(sysfs.fn_cluster_freq_range.format(cluster)).read().strip().split(' ')
-	return freqs
+	return [int(f.strip()) for f in freqs]
 
 def getClusterUsage(cluster_num):
 	with open(sysfs.fn_cluster_cpus.format(cluster_num),'r') as affected_cpus:
