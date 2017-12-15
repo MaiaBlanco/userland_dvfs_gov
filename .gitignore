@@ -9,3 +9,4 @@ linux*/
 *.swo
 *.swp
 ~*.*
+.ipynb_checkpoints/
