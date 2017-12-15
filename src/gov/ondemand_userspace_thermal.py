@@ -52,20 +52,19 @@ if __name__ == "__main__":
 	print("WARNING: thermal limits are only in effect for the big cluster.")
 	atexit.register(sysfs_utils.unsetUserSpace, clusters=clusters)
 	sysfs_utils.setUserSpace(clusters=clusters)
-	avail_freqs = [list()] * (sorted(clusters)[-1] + 1)
-	sel_cluster_freq = [0] * (sorted(clusters)[-1] + 1)
+	avail_freqs = {x:list() for x in clusters}
+	sel_cluster_freq = {x:0 for x in clusters}
 	for cluster in clusters:
 		avail_freqs[cluster] = sysfs_utils.getAvailFreqs(cluster)
-		print("{} frequencies for cluster {}".format(len(avail_freqs[cluster]), cluster))
-	Fs = [[0]] * (sorted(clusters)[-1] + 1)
-	Fs_new =  [[0]] * (sorted(clusters)[-1] + 1)
-	U = [0.0] * (sorted(clusters)[-1] + 1)
+	Fs = {x:0 for x in clusters}
+	Fs_new =  {x:0 for x in clusters}
+	U = {x:0.0 for x in clusters}
 	MAX_THERMAL_FREQ_INDEX = len(avail_freqs[cluster])-1
 	while True:
 		last_time = time.time()
 		# Get the latest cpu usages
 		#cpu_loads = sysfs_utils.getCpuLoad(n=-1, interval=CPU_USAGE_PERIOD)
-		cpu_loads = [ x/100 for x in \
+		cpu_loads = [ float(x)/100 for x in \
 			psutil.cpu_percent(interval=CPU_USAGE_PERIOD, percpu=True)]
 		for cluster in clusters:
 			if cluster == 4:
@@ -76,6 +75,8 @@ if __name__ == "__main__":
 					#print("Tripped thermal limit. ({} > {})".format(max(T), THERMAL_THRESH))
 				else:
 					MAX_THERMAL_FREQ_INDEX = len(avail_freqs[cluster])-1
+			else:
+				MAX_THERMAL_FREQ_INDEX = len(avail_freqs[cluster])-1
 			if max(cpu_loads[cluster:(cluster+CLUSTER_SIZE)]) > CLUSTER_UP_THRESH:
 				# increase the cluster frequency to max
 				sel_cluster_freq[cluster] = MAX_THERMAL_FREQ_INDEX
@@ -90,6 +91,7 @@ if __name__ == "__main__":
 				for index,frequency in enumerate(avail_freqs[cluster]):
 					if frequency == Fs_new[cluster]:
 						sel_cluster_freq[cluster] = index
+						break
 					elif frequency > Fs_new[cluster]:
 						sel_cluster_freq[cluster] = max(index-1, 0)
 						break
@@ -99,7 +101,7 @@ if __name__ == "__main__":
 			selected_index = sel_cluster_freq[cluster]
 			try:
 				sysfs_utils.setClusterFreq(cluster, \
-				avail_freqs[cluster][selected_index])
+											avail_freqs[cluster][selected_index])
 			except:
 				print("ERROR: tried to access {} for cluster {}".format(selected_index, cluster))
 				print(avail_freqs[cluster])

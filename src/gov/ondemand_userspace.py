@@ -6,17 +6,21 @@ import os
 import sysfs_paths as sysfs
 import math
 import atexit
+import psutil
 
 CLUSTER_UP_THRESH = 0.8
 LOAD_TARGET = CLUSTER_UP_THRESH
 # Sampling rate in steps of microseconds (us)
 FREQ_SAMPLING_RATE = 100
 CLUSTER_SIZE = 4
-REFRESH_PERIOD = 0.1
+REFRESH_PERIOD = 0.15
 MAX_THERMAL_FREQ_INDEX = 0
+# CPU usage polling period MUST be less than or equal to 
+# the refresh period. Minimum suggested in psutil docs is 0.1 s
+CPU_USAGE_PERIOD = REFRESH_PERIOD - 0.005 
 
 def usage():
-	print("USAGE: {} [cluster,numbers,separated,by,commas]", sys.argv[0])
+	print("USAGE: {} cluster,numbers,separated,by,commas", sys.argv[0])
 	sys.exit(1)
 
 def target_frequency(curr_usage, target_usage, current_freq_khz):
@@ -32,23 +36,23 @@ if __name__ == "__main__":
 	print("Starting userspace ondemand.")
 	atexit.register(sysfs_utils.unsetUserSpace, clusters=clusters)
 	sysfs_utils.setUserSpace(clusters=clusters)
-	avail_freqs = [list()] * (sorted(clusters)[-1] + 1)
-	sel_cluster_freq = [0] * (sorted(clusters)[-1] + 1)
+	avail_freqs = {x:list() for x in clusters}
+	sel_cluster_freq = {x:0 for x in clusters}
 	for cluster in clusters:
 		avail_freqs[cluster] = sysfs_utils.getAvailFreqs(cluster)
-	Fs = [[0]] * (sorted(clusters)[-1] + 1)
-	Fs_new =  [[0]] * (sorted(clusters)[-1] + 1)
-	U = [0.0] * (sorted(clusters)[-1] + 1)
+	Fs = {x:0 for x in clusters}
+	Fs_new =  {x:0 for x in clusters}
+	U = {x:0.0 for x in clusters}
 	while True:
 		last_time = time.time()
 		# Get the latest cpu usages
-		cpu_loads = sysfs_utils.getCpuLoad(n=-1, interval=0.05)
+		#cpu_loads = sysfs_utils.getCpuLoad(n=-1, interval=0.05)
+		cpu_loads = [ float(x)/100 for x in \
+			psutil.cpu_percent(interval=CPU_USAGE_PERIOD, percpu=True)]		
 		for cluster in clusters:
 			if max(cpu_loads[cluster:(cluster+CLUSTER_SIZE)]) > CLUSTER_UP_THRESH:
 				# increase the cluster frequency to max
 				sel_cluster_freq[cluster] = len(avail_freqs[cluster])-1
-				sysfs_utils.setClusterFreq(cluster, \
-						avail_freqs[cluster][sel_cluster_freq[cluster]])
 			else:
 				# find a frequency that will maintain no more than LOAD_TARGET usage on any core.
 				Fs[cluster] = sysfs_utils.getClusterFreq(cluster)
@@ -56,11 +60,15 @@ if __name__ == "__main__":
 													LOAD_TARGET, Fs[cluster])
 				# Search up to and including the current frequency for one that maintains the 
 				# desired load:
-				for index in range(	len(avail_freqs[cluster]) ):
-					if avail_freqs[cluster][index] >= Fs_new[cluster]:
+				for index,frequency in enumerate(avail_freqs[cluster]):
+					if frequency == Fs_new[cluster]:
 						sel_cluster_freq[cluster] = index
-						sysfs_utils.setClusterFreq(cluster, avail_freqs[cluster][index])
 						break
+					elif frequency > Fs_new[cluster]:
+						sel_cluster_freq[cluster] = max(index-1, 0)
+						break
+			sysfs_utils.setClusterFreq(cluster, \
+										avail_freqs[cluster][sel_cluster_freq[cluster]])
 		time.sleep( max(0, REFRESH_PERIOD - ( time.time() - last_time ) ) )
 		#print("period {} s".format( time.time() - last_time ) )
 
