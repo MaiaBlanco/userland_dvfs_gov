@@ -23,12 +23,12 @@ CPU_USAGE_PERIOD = REFRESH_PERIOD - 0.005
 def usage():
 	print("USAGE: {} [options]", sys.argv[0])
 	print("Options are:")
-	print("-t THERMAL_LIMIT_CELCIUS")
+	print("-t THERMAL_LIMIT_CELSIUS")
 	print("-c cluster,numbers,separated,by,commas")
 	sys.exit(1)
 
-def target_frequency(curr_usage, target_usage, current_freq_khz):
-	return math.ceil( (curr_usage * current_freq_khz) / (target_usage * 100000) ) * 100000
+def target_frequency(curr_usage, min_freq_khz, max_freq_khz):
+	return min_freq_khz + (max_freq_khz - min_freq_khz) * curr_usage
 
 if __name__ == "__main__":
 	clusters = [0,4]
@@ -85,7 +85,7 @@ if __name__ == "__main__":
 				# find a frequency that will maintain no more than LOAD_TARGET usage on any core.
 				Fs[cluster] = sysfs_utils.getClusterFreq(cluster)
 				Fs_new[cluster] = target_frequency(max(cpu_loads[cluster:(cluster+CLUSTER_SIZE)]),\
-													LOAD_TARGET, Fs[cluster])
+													avail_freqs[cluster][0], avail_freqs[cluster][-1])
 				# Search up to and including the current frequency for one that maintains the 
 				# desired load:
 				for index,frequency in enumerate(avail_freqs[cluster]):
