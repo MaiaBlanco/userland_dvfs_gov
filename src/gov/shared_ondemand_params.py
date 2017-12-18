@@ -15,12 +15,12 @@ LOAD_TARGET = CLUSTER_UP_THRESH
 REFRESH_PERIOD = 0.25
 
 # Power threshold in watts for power ondemand
-POWER_THRESH = 7
+POWER_THRESH = 5.5
 # Proportional term for ondemand power regulator
 P = 0.7
 
 # Thermal threshold in celsius for thermal ondemand
-THERMAL_THRESH = 60
+THERMAL_THRESH = 65
 # Proportional term for ondemand thermal regulator
 Pt = 0.1
 It = 0.1

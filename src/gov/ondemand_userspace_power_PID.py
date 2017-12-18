@@ -25,7 +25,17 @@ from shared_ondemand_params import (
 				P
 				)
 
+from therm_params import (
+				big_f_to_v, 
+				little_f_to_v,
+				c1, c2, Igate
+				)
+
+from power_model import peripheral_power 
+
 from shared_ondemand_params import target_frequency
+
+from power_model import leakagePower
 
 
 def usage():
@@ -38,7 +48,7 @@ def usage():
 def getTelnetPower(SP2_tel, last_power):
 	# Get the latest data available from the telnet connection 
 	# without blocking
-	tel_dat = str(SP2_tel.read_eager())
+	tel_dat = str(SP2_tel.read_very_eager())
 	# find latest power measurement in the data
 	findex = tel_dat.rfind('\n')
 	findex2 = tel_dat[:findex].rfind('\n')
@@ -53,7 +63,7 @@ def getTelnetPower(SP2_tel, last_power):
 
 def setup(clusters, POWER_THRESH):
 	SP2_tel = tel.Telnet("192.168.4.1")
-	print("Starting userspace ondemand with power limit of {} watts.".format(POWER_THRESH))
+	print("Starting userspace ondemand with dynamic power limit of {} watts.".format(POWER_THRESH))
 	print("Running for clusters: {}".format(clusters))
 	print("WARNING: power limit only in effect for the big cluster.")
 	atexit.register(sysfs_utils.unsetUserSpace, clusters=clusters)
@@ -79,15 +89,19 @@ def ondemand_power(clusters, POWER_THRESH):
 		last_time = time.time()
 		# Get the latest cpu usages
 		cpu_loads = sysfs_utils.getCpuLoad(n=-1, interval=0.0)
-		print(cpu_loads)
 		for cluster in clusters:
 			# Code to handle power limits ********************************************************
 			if cluster == 4:
+				T = sysfs_utils.getTemps()[0:4]
+				F = float(sysfs_utils.getClusterFreq(cluster) ) / 1000000
 				total_power = getTelnetPower(SP2_tel, total_power)
-				remaining_power = POWER_THRESH - total_power
+				#dynamic_power =  (total_power - peripheral_power - \
+				#				leakagePower(c1, c2, Igate, big_f_to_v[F], max(T)+273.15) )
+				#print(dynamic_power)
+				remaining_power = POWER_THRESH - (total_power - peripheral_power) 
 				if remaining_power <= 0:
 					MAX_FREQ_INDICES[cluster] = max(MAX_FREQ_INDICES[cluster] - 1, 0)
-					print("Tripped power limit. ({} > {})".format(total_power, POWER_THRESH))
+					print("Tripped power limit. ({} > {})".format(total_power-peripheral_power, POWER_THRESH))
 				else:
 					MAX_FREQ_INDICES[cluster] += math.floor(remaining_power * P)	
 					MAX_FREQ_INDICES[cluster] = min( len(avail_freqs[cluster])-1, 
