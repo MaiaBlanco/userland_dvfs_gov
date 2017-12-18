@@ -16,7 +16,7 @@ def eprint(*args, **kwargs):
 def getTelnetPower(SP2_tel, last_power):
 	# Get the latest data available from the telnet connection 
 	# without blocking
-	tel_dat = str(SP2_tel.read_eager())
+	tel_dat = str(SP2_tel.read_very_eager())
 	# find latest power measurement in the data
 	findex = tel_dat.rfind('\n')
 	findex2 = tel_dat[:findex].rfind('\n')
