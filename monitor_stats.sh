@@ -1,10 +1,15 @@
 #!/bin/bash
 # print the cpu temperature 
-for i in {0..4};
-do
-TEMP=`cat /sys/devices/virtual/thermal/thermal_zone${i}/temp`
-echo Temp $i: ${TEMP:0:2}.${TEMP:2:4} Celcius
-done
+TEMP0=`cat /sys/devices/virtual/thermal/thermal_zone0/temp`
+TEMP1=`cat /sys/devices/virtual/thermal/thermal_zone3/temp`
+TEMP2=`cat /sys/devices/virtual/thermal/thermal_zone2/temp`
+TEMP3=`cat /sys/devices/virtual/thermal/thermal_zone1/temp`
+TEMP4=`cat /sys/devices/virtual/thermal/thermal_zone4/temp`
+echo Core 4: ${TEMP0:0:2}.${TEMP0:2:4} Celcius
+echo Core 5: ${TEMP1:0:2}.${TEMP1:2:4} Celcius
+echo Core 6: ${TEMP2:0:2}.${TEMP2:2:4} Celcius
+echo Core 7: ${TEMP3:0:2}.${TEMP3:2:4} Celcius
+echo GPU: ${TEMP4:0:2}.${TEMP4:2:4} Celcius
 #echo `cut -b 1-2 <<< $TEMP` Celcius
 #echo Cooling 0:
 #cat /sys/devices/virtual/thermal/cooling_device0/cur_state
@@ -12,7 +17,7 @@ done
 #cat /sys/devices/virtual/thermal/cooling_device1/cur_state
 #echo Fan PWM:
 #cat /sys/devices/odroid_fan.14/pwm_duty
-for i in {0..7};
+for i in {0,4};
 do
 FREQ=`cat /sys/devices/system/cpu/cpu$i/cpufreq/cpuinfo_cur_freq`
 FREQ2=`cat /sys/devices/system/cpu/cpu$i/cpufreq/scaling_cur_freq`
@@ -26,8 +31,8 @@ cat /sys/devices/system/cpu/online
 #echo MEM Freq:
 # Below only worked on android
 #cat /sys/devices/platform/exynos5-devfreq-mif/devfreq/exynos5-devfreq-mif/cur_freq
-echo Available CPU Governors:
-cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
+#echo Available CPU Governors:
+#cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
 echo Avail. Freqs. for Cluster 1:
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
 echo C1 gov: `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`

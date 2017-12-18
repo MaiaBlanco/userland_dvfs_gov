@@ -1,0 +1,129 @@
+Sleeping for 10s, then starting individual CPU loading tests.
+PAPI Version Number:
+5.5.0
+Benchmarking operations...
+Doing float MAC.
+Performed 1000000000 32-bit fMAC operations in 141.851 seconds.
+PAPI instructions: 55000250191
+PAPI cycles: 27680048405
+IPC: 1.987
+Overall throughput: 1.40993e+07 FLOP/s
+Resting for 10 seconds.
+Doing int MAC
+Performed 1000000000 32-bit iMAC operations in 93.2647 seconds.
+PAPI instructions: 43000250191
+PAPI cycles: 18191009419
+IPC: 2.36382
+Overall throughput: 2.14443e+07 FLIP/s
+Completed multiply accumulate tests.
+Resting for 10 seconds.
+Doing float ADD
+Performed 1000000000 32-bit fADD operations in 101.786 seconds.
+PAPI instructions: 35000250191
+PAPI cycles: 19845794081
+IPC: 1.76361
+Overall throughput: 9.82457e+06 FLOP/s
+Resting for 10 seconds.
+Doing int ADD
+Performed 1000000000 32-bit iADD operations in 80.117 seconds.
+PAPI instructions: 36000250191
+PAPI cycles: 15628502450
+IPC: 2.3035
+Overall throughput: 1.24817e+07 FLIP/s
+Done on core 4. Starting core 5 in 10 seconds.
+PAPI Version Number:
+5.5.0
+Benchmarking operations...
+Doing float MAC.
+Performed 1000000000 32-bit fMAC operations in 141.937 seconds.
+PAPI instructions: 55000250191
+PAPI cycles: 27682898660
+IPC: 1.9868
+Overall throughput: 1.40907e+07 FLOP/s
+Resting for 10 seconds.
+Doing int MAC
+Performed 1000000000 32-bit iMAC operations in 93.2103 seconds.
+PAPI instructions: 43000250191
+PAPI cycles: 18176868912
+IPC: 2.36566
+Overall throughput: 2.14568e+07 FLIP/s
+Completed multiply accumulate tests.
+Resting for 10 seconds.
+Doing float ADD
+Performed 1000000000 32-bit fADD operations in 101.723 seconds.
+PAPI instructions: 35000250191
+PAPI cycles: 19836129376
+IPC: 1.76447
+Overall throughput: 9.83063e+06 FLOP/s
+Resting for 10 seconds.
+Doing int ADD
+Performed 1000000000 32-bit iADD operations in 80.1014 seconds.
+PAPI instructions: 36000250191
+PAPI cycles: 15622944304
+IPC: 2.30432
+Overall throughput: 1.24842e+07 FLIP/s
+Done on core 5. Starting core 6 in 10 seconds.
+PAPI Version Number:
+5.5.0
+Benchmarking operations...
+Doing float MAC.
+Performed 1000000000 32-bit fMAC operations in 5.81667e+07 seconds.
+PAPI instructions: 55000250191
+PAPI cycles: 27707415827
+IPC: 1.98504
+Overall throughput: 34.3839 FLOP/s
+Resting for 10 seconds.
+Doing int MAC
+Performed 1000000000 32-bit iMAC operations in 93.7538 seconds.
+PAPI instructions: 43000250191
+PAPI cycles: 18179831059
+IPC: 2.36527
+Overall throughput: 2.13325e+07 FLIP/s
+Completed multiply accumulate tests.
+Resting for 10 seconds.
+Doing float ADD
+Performed 1000000000 32-bit fADD operations in 102.311 seconds.
+PAPI instructions: 35000250191
+PAPI cycles: 19837815787
+IPC: 1.76432
+Overall throughput: 9.77415e+06 FLOP/s
+Resting for 10 seconds.
+Doing int ADD
+Performed 1000000000 32-bit iADD operations in 80.6352 seconds.
+PAPI instructions: 36000250191
+PAPI cycles: 15630558027
+IPC: 2.3032
+Overall throughput: 1.24015e+07 FLIP/s
+Done on core 6. Starting core 7 in 10 seconds.
+PAPI Version Number:
+5.5.0
+Benchmarking operations...
+Doing float MAC.
+Performed 1000000000 32-bit fMAC operations in 141.823 seconds.
+PAPI instructions: 55000250191
+PAPI cycles: 27723866675
+IPC: 1.98386
+Overall throughput: 1.41021e+07 FLOP/s
+Resting for 10 seconds.
+Doing int MAC
+Performed 1000000000 32-bit iMAC operations in 93.0112 seconds.
+PAPI instructions: 43000250191
+PAPI cycles: 18216153755
+IPC: 2.36056
+Overall throughput: 2.15028e+07 FLIP/s
+Completed multiply accumulate tests.
+Resting for 10 seconds.
+Doing float ADD
+Performed 1000000000 32-bit fADD operations in 101.422 seconds.
+PAPI instructions: 35000250191
+PAPI cycles: 19868900598
+IPC: 1.76156
+Overall throughput: 9.85981e+06 FLOP/s
+Resting for 10 seconds.
+Doing int ADD
+Performed 1000000000 32-bit iADD operations in 79.9077 seconds.
+PAPI instructions: 36000250191
+PAPI cycles: 15656075016
+IPC: 2.29944
+Overall throughput: 1.25144e+07 FLIP/s
+Finished all runs on all 8 cores.

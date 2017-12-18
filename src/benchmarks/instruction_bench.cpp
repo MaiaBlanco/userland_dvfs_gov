@@ -28,7 +28,7 @@ http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/CHDHHAJF.ht
 // #include <asm.h>
 
 // Target number of cycles for each instruction
-#define CYCLES 10000
+#define CYCLES 20000
 #define ARRAY_SIZE 100000
 #define MICROSECONDS 10000000
 

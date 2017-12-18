@@ -1,7 +1,8 @@
 import time
 import sys, os
 import sysfs_paths as sysfs
-import atexit 
+import atexit
+import psutil
 
 # Userspace cpu frequency governor
 # Based on:
@@ -20,66 +21,50 @@ CL1_UP_THRESH = 0.8
 CL1_DN_THRESH = 0.5
 # Sampling rate in steps of microseconds (us)
 FREQ_SAMPLING_RATE = 100
-# Interval for sampling CPU load, in seconds
-INTERVAL = 0.05
+# Default interval for sampling CPU load, in seconds
+INTERVAL = 0.1
 
 prev_govs = list()
+times = None
 
-def getTimeList(n=None):
-	"""
-	Fetches a list of time units the cpu has spent in various modes
-	Detailed explanation at http://www.linuxhowtos.org/System/procstat.htm
-	"""
-	if n is None:	
-		cpuStats = file("/proc/stat", "r").readline().strip()
-		columns = cpuStats.replace("cpu", "").split(" ")
-		return map(int, filter(None, columns))
-	else:
-		with open("/proc/stat", "r") as procs:
-			# Read out the first line which is aggregate usage
-			cpuStats_l = [x for x in procs.read().split('\n') if 'cpu' in x]
-			cpuStats_l = [e.strip().split(' ')[1:] for e in cpuStats_l]
-			if n == -1:
-				columns = cpuStats_l[1:]
-				return [map(int, filter(None, cpu_row)) for cpu_row in columns]
-			else:
-				columns = cpuStats_l[n+1]
-				return map(int, filter(None, columns))
-
-def deltaTime(interval, n=None):
-	"""
-	Returns the difference of the cpu statistics returned by getTimeList
-	that occurred in the given time delta
-	"""
-	timeList1 = getTimeList(n)	
-	time.sleep(interval)
-	timeList2 = getTimeList(n)
-	# -1 returns all cpus:
-	if n == -1:
-		all_deltas = []
-		for i in range(len(timeList1)):
-			all_deltas.append(
-			[(t2-t1) for t1, t2 in zip(timeList1[i], timeList2[i])]
-			)		
-		return all_deltas
-	else:
-		return [(t2-t1) for t1, t2 in zip(timeList1, timeList2)]
 
 def getCpuLoad(n=None, interval=INTERVAL):
 	"""
 	Returns the cpu load as a value from the interval [0.0, 1.0]
 	"""
-	dt = deltaTime(interval,n)
-	if n > -1:
-		idle_time = float(dt[3])
-		total_time = sum(dt)
-		load = 1-(idle_time/total_time)
-		return load
+	global times
+	if not (interval is None or interval == 0.0):
+		old_times = psutil.cpu_times(percpu=True)
+		time.sleep(interval)
 	else:
-		idle_times = [float(y[3]) for y in dt]
-		total_times = [sum(y) for y in dt]
-		loads = [(1-(x/y)) for x,y in zip(idle_times, total_times)]
-		return loads
+		old_times = times
+	times = psutil.cpu_times(percpu=True)
+	if old_times is None or len(old_times) != len(times):
+		if n is None or n == -1:
+			return [0.0 for x in times]
+		else:
+			return 0.0
+	else:
+		if n is None or n == -1:
+			old_and_new = zip(old_times, times)
+			idle_delta = [y.idle - x.idle for x,y in old_and_new]
+			io_delta =  [y.iowait - x.iowait for x,y in old_and_new]
+			total_delta =  [sum(y) - sum(x) for x,y in old_and_new]
+			loads = [(1-((x+y)/z)) for x,y,z in zip(idle_delta, io_delta, total_delta)]
+			return loads
+		else:
+			idle_delta = times[n].idle - old_times[n].idle
+			io_delta = times[n].iowait - old_times[n].iowait
+			total_delta = sum(times[n]) - sum(old_times[n])
+			load = 1-((idle_delta + io_delta)/total_delta)
+			return load
+#	loads = [x/100 for x in psutil.cpu_percent(interval=INTERVAL, percpu=True)]
+#	if n > -1:
+#		return loads[n]
+#	else:
+#		#total = sum(loads)/(100*len(loads))
+#		#loads = [total] + loads
+#		return loads
 
 def getAvailFreqs(cpu_num):
 	cluster = (cpu_num//4) * 4

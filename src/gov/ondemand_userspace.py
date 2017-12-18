@@ -1,3 +1,8 @@
+'''
+Author: Mark Blanco
+Copyright: Carnegie Mellon University
+Date: Dec 2017
+'''
 import sys
 sys.path.append("..")
 import cpu_usage as sysfs_utils
@@ -8,23 +13,19 @@ import math
 import atexit
 import psutil
 
-CLUSTER_UP_THRESH = 0.8
-LOAD_TARGET = CLUSTER_UP_THRESH
-# Sampling rate in steps of microseconds (us)
-FREQ_SAMPLING_RATE = 100
-CLUSTER_SIZE = 4
-REFRESH_PERIOD = 0.15
-MAX_THERMAL_FREQ_INDEX = 0
-# CPU usage polling period MUST be less than or equal to 
-# the refresh period. Minimum suggested in psutil docs is 0.1 s
-CPU_USAGE_PERIOD = REFRESH_PERIOD - 0.005 
+from shared_ondemand_params import (
+				CLUSTER_UP_THRESH,
+				LOAD_TARGET,
+				CLUSTER_SIZE,
+				REFRESH_PERIOD,
+				MAX_THERMAL_FREQ_INDEX,
+				)
+
+from shared_ondemand_params import target_frequency
 
 def usage():
 	print("USAGE: {} cluster,numbers,separated,by,commas", sys.argv[0])
 	sys.exit(1)
-
-def target_frequency(curr_usage, min_freq_khz, max_freq_khz):
-	return min_freq_khz + (max_freq_khz - min_freq_khz) * curr_usage
 
 if __name__ == "__main__":
 	clusters = [0,4]
@@ -46,9 +47,7 @@ if __name__ == "__main__":
 	while True:
 		last_time = time.time()
 		# Get the latest cpu usages
-		#cpu_loads = sysfs_utils.getCpuLoad(n=-1, interval=0.05)
-		cpu_loads = [ float(x)/100 for x in \
-			psutil.cpu_percent(interval=CPU_USAGE_PERIOD, percpu=True)]		
+		cpu_loads = sysfs_utils.getCpuLoad(n=-1, interval=0.0)
 		for cluster in clusters:
 			if max(cpu_loads[cluster:(cluster+CLUSTER_SIZE)]) > CLUSTER_UP_THRESH:
 				# increase the cluster frequency to max
@@ -56,8 +55,8 @@ if __name__ == "__main__":
 			else:
 				# find a frequency that will maintain no more than LOAD_TARGET usage on any core.
 				Fs[cluster] = sysfs_utils.getClusterFreq(cluster)
-				Fs_new[cluster] = target_frequency(max(cpu_loads[cluster:(cluster+CLUSTER_SIZE)]),\
-													avail_freqs[cluster][0], avail_freqs[cluster][-1])
+				Fs_new[cluster] = min( Fs[cluster], target_frequency(max(cpu_loads[cluster:(cluster+CLUSTER_SIZE)]),\
+													avail_freqs[cluster][0], avail_freqs[cluster][-1]) )
 				# Search up to and including the current frequency for one that maintains the 
 				# desired load:
 				for index,frequency in enumerate(avail_freqs[cluster]):
