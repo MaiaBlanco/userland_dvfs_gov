@@ -1,0 +1,47 @@
+[PARSEC] Benchmarks to run:  parsec.blackscholes
+
+[PARSEC] [========== Running benchmark parsec.blackscholes [1] ==========]
+[PARSEC] Deleting old run directory.
+[PARSEC] Setting up run directory.
+[PARSEC] Unpacking benchmark input 'native'.
+in_10M.txt
+[PARSEC] Running 'sudo perf stat -e cycles -e instructions -e page-faults -e context-switches -e L1-dcache-loads -aA -C 4-7 taskset --all-tasks 0xf0 /home/odroid/PARSEC/parsec-3.0/bin/../pkgs/apps/blackscholes/inst/arm-linux.gcc-openmp/bin/blackscholes 4 in_10M.txt prices.txt':
+[PARSEC] [---------- Beginning of output ----------]
+sudo: unable to resolve host blancoxu4_2
+PARSEC Benchmark Suite Version 3.0-beta-20150206
+Num of Options: 10000000
+Num of Runs: 100
+Size of data: 400000000
+
+ Performance counter stats for 'system wide':
+
+CPU4       225,577,390,854      cycles                                                      
+CPU5       323,880,264,989      cycles                                                      
+CPU6       211,140,174,562      cycles                                                      
+CPU7       212,234,055,044      cycles                                                      
+CPU4       158,481,337,720      instructions              #    0.70  insn per cycle         
+CPU5       311,875,251,012      instructions              #    1.38  insn per cycle         
+CPU6       155,570,362,438      instructions              #    0.69  insn per cycle         
+CPU7       159,634,862,716      instructions              #    0.71  insn per cycle         
+CPU4                 2,752      page-faults                                                 
+CPU5               149,830      page-faults                                                 
+CPU6                 5,287      page-faults                                                 
+CPU7                 2,667      page-faults                                                 
+CPU4               252,459      context-switches                                            
+CPU5                 5,795      context-switches                                            
+CPU6                10,256      context-switches                                            
+CPU7                 2,033      context-switches                                            
+CPU4        40,610,201,396      L1-dcache-loads                                             
+CPU5        69,691,142,368      L1-dcache-loads                                             
+CPU6        39,899,837,988      L1-dcache-loads                                             
+CPU7        40,699,114,797      L1-dcache-loads                                             
+
+     190.106189748 seconds time elapsed
+
+[PARSEC] [----------    End of output    ----------]
+[PARSEC]
+[PARSEC] BIBLIOGRAPHY
+[PARSEC]
+[PARSEC] [1] Bienia. Benchmarking Modern Multiprocessors. Ph.D. Thesis, 2011.
+[PARSEC]
+[PARSEC] Done.
