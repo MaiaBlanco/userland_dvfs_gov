@@ -37,6 +37,7 @@ from shared_ondemand_params import target_frequency
 
 from power_model import leakagePower
 
+logfile = None
 
 def usage():
 	print("USAGE: {} [options]", sys.argv[0])
@@ -68,6 +69,7 @@ def setup(clusters, POWER_THRESH):
 	print("WARNING: power limit only in effect for the big cluster.")
 	atexit.register(sysfs_utils.unsetUserSpace, clusters=clusters)
 	sysfs_utils.setUserSpace(clusters=clusters)
+	logfile = open("ondemand_power_gov_{}_log.csv".format(POWER_THRESH), 'w')
 	return SP2_tel
 
 
@@ -95,9 +97,10 @@ def ondemand_power(clusters, POWER_THRESH):
 				T = sysfs_utils.getTemps()[0:4]
 				F = float(sysfs_utils.getClusterFreq(cluster) ) / 1000000
 				total_power = getTelnetPower(SP2_tel, total_power)
-				#dynamic_power =  (total_power - peripheral_power - \
-				#				leakagePower(c1, c2, Igate, big_f_to_v[F], max(T)+273.15) )
-				#print(dynamic_power)
+				leakage_power = leakagePower(c1, c2, Igate, big_f_to_v[F], max(T)+273.15)
+				dynamic_power =  (total_power - peripheral_power - leakage_power )
+				if logfile is not None:
+					logfile.write("{}\t{}\t{}\n".format(total_power, leakage_power, dynamic_power ))
 				remaining_power = POWER_THRESH - (total_power - peripheral_power) 
 				if remaining_power <= 0:
 					MAX_FREQ_INDICES[cluster] = max(MAX_FREQ_INDICES[cluster] - 1, 0)
@@ -143,7 +146,7 @@ def ondemand_power(clusters, POWER_THRESH):
 		#print("period {} s".format( time.time() - last_time ) )
 
 if __name__ == "__main__":
-	clusters = [0,4]
+	clusters = [4]
 	if len(sys.argv) > 1:
 		print(sys.argv)
 		try:

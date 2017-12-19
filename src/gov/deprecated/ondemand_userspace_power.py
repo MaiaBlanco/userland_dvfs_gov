@@ -27,7 +27,7 @@ def usage():
 	sys.exit(1)
 
 if __name__ == "__main__":
-	clusters = [0,4]
+	clusters = [4]
 	if len(sys.argv) > 1:
 		print(sys.argv)
 		try:
