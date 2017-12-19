@@ -1,0 +1,59 @@
+[PARSEC] Benchmarks to run:  parsec.blackscholes
+
+[PARSEC] [========== Running benchmark parsec.blackscholes [1] ==========]
+[PARSEC] Deleting old run directory.
+[PARSEC] Setting up run directory.
+[PARSEC] Unpacking benchmark input 'native'.
+in_10M.txt
+[PARSEC] Running 'sudo perf stat -aA -C 4-7 taskset --all-tasks 0xf0 /home/odroid/userland_dvfs_gov/data/blackscholes_benchmarking/../../../PARSEC/parsec-3.0/pkgs/apps/blackscholes/inst/arm-linux.gcc-openmp/bin/blackscholes 4 in_10M.txt prices.txt':
+[PARSEC] [---------- Beginning of output ----------]
+sudo: unable to resolve host blancoxu4_2
+PARSEC Benchmark Suite Version 3.0-beta-20150206
+Num of Options: 10000000
+Num of Runs: 100
+Size of data: 400000000
+
+ Performance counter stats for 'system wide':
+
+CPU4         186785.372995      cpu-clock (msec)          #    1.000 CPUs utilized          
+CPU5         186785.372370      cpu-clock (msec)          #    1.000 CPUs utilized          
+CPU6         186785.364828      cpu-clock (msec)          #    1.000 CPUs utilized          
+CPU7         186785.350620      cpu-clock (msec)          #    1.000 CPUs utilized          
+CPU4               267,253      context-switches          #    0.001 M/sec                  
+CPU5                 1,315      context-switches          #    0.007 K/sec                  
+CPU6                15,490      context-switches          #    0.083 K/sec                  
+CPU7                 2,539      context-switches          #    0.014 K/sec                  
+CPU4                 1,648      cpu-migrations            #    0.009 K/sec                  
+CPU5                   179      cpu-migrations            #    0.001 K/sec                  
+CPU6                 1,772      cpu-migrations            #    0.009 K/sec                  
+CPU7                   566      cpu-migrations            #    0.003 K/sec                  
+CPU4                32,293      page-faults               #    0.173 K/sec                  
+CPU5               151,623      page-faults               #    0.812 K/sec                  
+CPU6                35,187      page-faults               #    0.188 K/sec                  
+CPU7                 8,381      page-faults               #    0.045 K/sec                  
+CPU4       229,673,707,172      cycles                    #    1.230 GHz                    
+CPU5       327,937,406,238      cycles                    #    1.756 GHz                    
+CPU6       214,480,520,000      cycles                    #    1.148 GHz                    
+CPU7       210,363,407,834      cycles                    #    1.126 GHz                    
+CPU4       159,750,448,181      instructions              #    0.70  insn per cycle         
+CPU5       314,662,482,012      instructions              #    1.37  insn per cycle         
+CPU6       156,152,887,847      instructions              #    0.68  insn per cycle         
+CPU7       155,551,702,844      instructions              #    0.68  insn per cycle         
+CPU4        13,172,237,913      branches                  #   70.521 M/sec                  
+CPU5        41,526,389,675      branches                  #  222.321 M/sec                  
+CPU6        12,456,310,045      branches                  #   66.688 M/sec                  
+CPU7        12,328,825,612      branches                  #   66.005 M/sec                  
+CPU4           136,843,828      branch-misses             #    1.04% of all branches        
+CPU5           996,613,473      branch-misses             #    7.57% of all branches        
+CPU6           114,010,520      branch-misses             #    0.87% of all branches        
+CPU7           106,908,984      branch-misses             #    0.81% of all branches        
+
+     186.784387734 seconds time elapsed
+
+[PARSEC] [----------    End of output    ----------]
+[PARSEC]
+[PARSEC] BIBLIOGRAPHY
+[PARSEC]
+[PARSEC] [1] Bienia. Benchmarking Modern Multiprocessors. Ph.D. Thesis, 2011.
+[PARSEC]
+[PARSEC] Done.
