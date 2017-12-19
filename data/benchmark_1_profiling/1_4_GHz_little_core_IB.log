@@ -1,0 +1,31 @@
+PAPI Version Number:
+5.5.0
+Benchmarking operations...
+Doing float MAC.
+Performed 2000000000 32-bit fMAC operations in 161.081 seconds.
+PAPI instructions: 0
+PAPI cycles: 0
+IPC: nan
+Overall throughput: 2.48323e+07 FLOP/s
+Resting for 10 seconds.
+Doing int MAC
+Performed 2000000000 32-bit iMAC operations in 126.496 seconds.
+PAPI instructions: 0
+PAPI cycles: 0
+IPC: nan
+Overall throughput: 3.16215e+07 FLIP/s
+Completed multiply accumulate tests.
+Resting for 10 seconds.
+Doing float ADD
+Performed 2000000000 32-bit fADD operations in 91.1118 seconds.
+PAPI instructions: 0
+PAPI cycles: 0
+IPC: nan
+Overall throughput: 2.1951e+07 FLOP/s
+Resting for 10 seconds.
+Doing int ADD
+Performed 2000000000 32-bit iADD operations in 89.1976 seconds.
+PAPI instructions: 0
+PAPI cycles: 0
+IPC: nan
+Overall throughput: 2.24221e+07 FLIP/s

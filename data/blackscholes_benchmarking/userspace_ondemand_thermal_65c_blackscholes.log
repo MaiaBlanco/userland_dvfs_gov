@@ -14,40 +14,40 @@ Size of data: 400000000
 
  Performance counter stats for 'system wide':
 
-CPU4         306852.646829      cpu-clock (msec)          #    1.000 CPUs utilized          
-CPU5         306852.638286      cpu-clock (msec)          #    1.000 CPUs utilized          
-CPU6         306852.620036      cpu-clock (msec)          #    1.000 CPUs utilized          
-CPU7         306852.604204      cpu-clock (msec)          #    1.000 CPUs utilized          
-CPU4                96,314      context-switches          #    0.314 K/sec                  
-CPU5                 1,614      context-switches          #    0.005 K/sec                  
-CPU6                13,365      context-switches          #    0.044 K/sec                  
-CPU7                 4,506      context-switches          #    0.015 K/sec                  
-CPU4                 2,359      cpu-migrations            #    0.008 K/sec                  
-CPU5                   220      cpu-migrations            #    0.001 K/sec                  
-CPU6                 2,365      cpu-migrations            #    0.008 K/sec                  
-CPU7                   845      cpu-migrations            #    0.003 K/sec                  
-CPU4                50,942      page-faults               #    0.166 K/sec                  
-CPU5               149,964      page-faults               #    0.489 K/sec                  
-CPU6                53,668      page-faults               #    0.175 K/sec                  
-CPU7                13,153      page-faults               #    0.043 K/sec                  
-CPU4       220,548,424,567      cycles                    #    0.719 GHz                    
-CPU5       325,400,404,158      cycles                    #    1.060 GHz                    
-CPU6       215,558,560,780      cycles                    #    0.702 GHz                    
-CPU7       208,471,388,563      cycles                    #    0.679 GHz                    
-CPU4       159,144,601,455      instructions              #    0.72  insn per cycle         
-CPU5       316,522,964,733      instructions              #    1.44  insn per cycle         
-CPU6       162,093,573,392      instructions              #    0.73  insn per cycle         
-CPU7       156,105,676,633      instructions              #    0.71  insn per cycle         
-CPU4        13,102,893,102      branches                  #   42.701 M/sec                  
-CPU5        41,903,895,874      branches                  #  136.560 M/sec                  
-CPU6        12,667,293,539      branches                  #   41.281 M/sec                  
-CPU7        12,466,349,500      branches                  #   40.627 M/sec                  
-CPU4           137,742,215      branch-misses             #    1.05% of all branches        
-CPU5           990,930,977      branch-misses             #    7.56% of all branches        
-CPU6           121,868,424      branch-misses             #    0.93% of all branches        
-CPU7           110,399,780      branch-misses             #    0.84% of all branches        
+CPU4         279157.520642      cpu-clock (msec)          #    1.000 CPUs utilized          
+CPU5         279157.514267      cpu-clock (msec)          #    1.000 CPUs utilized          
+CPU6         279157.482683      cpu-clock (msec)          #    1.000 CPUs utilized          
+CPU7         279157.464434      cpu-clock (msec)          #    1.000 CPUs utilized          
+CPU4               143,626      context-switches          #    0.514 K/sec                  
+CPU5                46,784      context-switches          #    0.168 K/sec                  
+CPU6                16,036      context-switches          #    0.057 K/sec                  
+CPU7                 2,289      context-switches          #    0.008 K/sec                  
+CPU4                 2,230      cpu-migrations            #    0.008 K/sec                  
+CPU5                   542      cpu-migrations            #    0.002 K/sec                  
+CPU6                 2,376      cpu-migrations            #    0.009 K/sec                  
+CPU7                   610      cpu-migrations            #    0.002 K/sec                  
+CPU4                45,591      page-faults               #    0.163 K/sec                  
+CPU5               149,312      page-faults               #    0.535 K/sec                  
+CPU6                40,787      page-faults               #    0.146 K/sec                  
+CPU7                 9,098      page-faults               #    0.033 K/sec                  
+CPU4       232,160,150,554      cycles                    #    0.832 GHz                    
+CPU5       313,674,198,826      cycles                    #    1.124 GHz                    
+CPU6       217,364,500,177      cycles                    #    0.779 GHz                    
+CPU7       208,767,079,032      cycles                    #    0.748 GHz                    
+CPU4       172,978,391,635      instructions              #    0.75  insn per cycle         
+CPU5       297,401,961,883      instructions              #    1.28  insn per cycle         
+CPU6       161,999,830,547      instructions              #    0.70  insn per cycle         
+CPU7       155,883,928,160      instructions              #    0.67  insn per cycle         
+CPU4        15,650,901,891      branches                  #   56.065 M/sec                  
+CPU5        38,370,084,965      branches                  #  137.450 M/sec                  
+CPU6        13,572,804,214      branches                  #   48.621 M/sec                  
+CPU7        12,418,514,899      branches                  #   44.486 M/sec                  
+CPU4           219,587,389      branch-misses             #    1.40% of all branches        
+CPU5           910,302,916      branch-misses             #    5.82% of all branches        
+CPU6           142,468,906      branch-misses             #    0.91% of all branches        
+CPU7           107,158,629      branch-misses             #    0.68% of all branches        
 
-     306.851041806 seconds time elapsed
+     279.156107240 seconds time elapsed
 
 [PARSEC] [----------    End of output    ----------]
 [PARSEC]
