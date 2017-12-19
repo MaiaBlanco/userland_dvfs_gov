@@ -22,7 +22,9 @@ int main()
 	PAPI_hw_info_t *hw_info;
 
 	printf("Found %d PAPI counters!\n", PAPI_num_counters() );
-	PAPI_flops(&rtime, &ptime, &flpins, &mflips);
+	retval = PAPI_flops(&rtime, &ptime, &flpins, &mflips);
+	if ( retval != PAPI_OK )
+		printf("PROBLEM! Flops command doesn't work here!\n");
 	printf("Flops: %f\n", mflips );
 	printf("rtime: %f\n", rtime );
 	printf("ptime: %f\n", ptime );
@@ -115,6 +117,41 @@ int main()
 	//if ( retval != PAPI_OK ) handle_error(retval);
 	printf("Result: %d\n", retval);
 */
+	
+	// Now list the native events present on the system.
+	printf("*****************NATIVE EVENTS********************\n");
+	printf("Now listing the native events present on the system...\n");
+	int event_set_n = PAPI_NULL;
+	native = 0x0;
+	PAPI_event_info_t info_native;
+
+	if (PAPI_create_eventset(&event_set_n) != PAPI_OK)
+	{
+		handle_error(1);
+	}
+
+	// find the first native event (should be 0x0->SW_INCR)
+	// Events are documented here for cortex-A15:
+	// http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0438g/BIIDBAFB.html
+	native =  | 0;
+	if ( (retval=PAPI_get_event_info(native, &info_native)) != PAPI_OK)
+	{
+		handle_error(retval);
+	}
+	else
+	{
+		PAPI_event_code_to_name( native, evnt_nm );
+	}
+	
+	// add first event to event_set_n:
+	if ( (retval=PAPI_add_event(event_set_n, native)) != PAPI_OK)
+	{
+		handle_error(retval);
+	}
+	else
+	{
+		printf("Successfully added %s to eventset!\n", evnt_nm );
+	}
 
 	return 0;
 }
