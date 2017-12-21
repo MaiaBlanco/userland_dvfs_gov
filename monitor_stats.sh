@@ -46,3 +46,9 @@ echo GPU Freq: $FREQ
 #echo Little Voltage: $VDD1 uVolts
 #VDD2=`cat /sys/devices/platform/pwrseq:/subsystem/devices/s2mps11-regulator/regulator/regulator.40/microvolts`
 #echo Little Voltage: $VDD2 uVolts
+
+gpu_voltage=`cat /sys/devices/platform/pwrseq/subsystem/devices/s2mps11-regulator/regulator/regulator.42/microvolts`
+mem_voltage=`cat /sys/devices/platform/pwrseq/subsystem/devices/s2mps11-regulator/regulator/regulator.43/microvolts`
+echo GPU_V: $gpu_voltage
+echo MEM_V: $mem_voltage
+

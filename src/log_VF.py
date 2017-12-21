@@ -23,7 +23,7 @@ while True:
 	l_freq = cpu_usage.getClusterFreq(0)
 	b_vdd = cpu_usage.resVoltage(4) 
 	l_vdd = cpu_usage.resVoltage(0)
-	print("{} {} {} {}".format(l_vdd, l_freq, b_vdd, b_freq))
+	print("{}\t{}\t{}\t{}".format(l_vdd, l_freq, b_vdd, b_freq))
 	if up and li != len(little_freqs)-1:
 		li += 1
 	elif up and bi != len(big_freqs)-1:

@@ -132,7 +132,7 @@ def getGPUFreq():
 
 def getMemFreq():
 		# See also in sysfs_paths.py: Linux kernel 4.9 sets mem to const freq (khz)
-		return int(825000)
+		return int(750000)
 
 def getTemps():
 	templ = []
