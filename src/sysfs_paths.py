@@ -56,8 +56,7 @@ gpu_micro_volts = gpu_voltage_base + 'microvolts'
 
 
 # Paths for memory stats:
-# NOTE: on Ubuntu with Linux kernel 4.9, there is no frequency governor for the memory.
-# Memory runs at default frequency of 825000 kHz
+# Memory runs at default frequency of 750000 kHz
 # mem_freq_base = "/sys/class/devfreq/exynos5-devfreq-mif/"
 # mem_freq = mem_freq_base + 
 mem_voltage_base="/sys/devices/platform/pwrseq/subsystem/devices/s2mps11-regulator/regulator/regulator.43/"
