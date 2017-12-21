@@ -6,8 +6,8 @@ import os
 
 FNULL = open(os.devnull, 'w')
 
-bench_thresh = 0.1#0.5
-period_max = 1#60
+bench_thresh = 0.5
+period_max = 60
 bench_processes = []
 other_processes = []
 input_size = ["native", "simlarge", "simsmall"]
