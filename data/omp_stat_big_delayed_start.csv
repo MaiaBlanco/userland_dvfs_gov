@@ -1,0 +1,71 @@
+# started on Tue Dec 12 02:34 2017                                                               
+                                                                                                 
+     RUN WITH DELAY SUCH T                                                                       
+ Performance counter statsr 'CPU(s) 4-7':                                                        
+                                                                                                 
+CPU4           8990.452548   cpu-clock (msec)         1.000 CPUs utilized                        
+CPU5           8990.456882   cpu-clock (msec)         1.000 CPUs utilized                        
+CPU6           8990.457007   cpu-clock (msec)         1.000 CPUs utilized                        
+CPU7           8990.456549   cpu-clock (msec)         1.000 CPUs utilized                        
+CPU4                  1999   context-switches         0.222 K/sec                                
+CPU5                   906   context-switches         0.101 K/sec                                
+CPU6                   425   context-switches         0.047 K/sec                                
+CPU7                   383   context-switches         0.043 K/sec                                
+CPU4                    26   cpu-migrations           0.003 K/sec                                
+CPU5                    15   cpu-migrations           0.002 K/sec                                
+CPU6                    27   cpu-migrations           0.003 K/sec                                
+CPU7                     7   cpu-migrations           0.001 K/sec                                
+CPU4                  9609   page-faults              0.001 M/sec                                
+CPU5                 13875   page-faults              0.002 M/sec                                
+CPU6                   675   page-faults              0.075 K/sec                                
+CPU7                   633   page-faults              0.070 K/sec                                
+CPU4           11731915946   cycles                   1.305 GHz                  (58.2           
+CPU5           13329079779   cycles                   1.483 GHz                  (58.2           
+CPU6            8192549034   cycles                   0.911 GHz                  (58.2           
+CPU7            8151328370   cycles                   0.907 GHz                  (58.2Actual IPC 
+CPU4            9931840463   instructions             0.85  insn per cycle       (58.30.846565941Note higher
+CPU5           10678980617   instructions             0.91  insn per cycle       (58.3        ###faults for 
+CPU6            9184573973   instructions             0.78  insn per cycle       (58.3        ###
+CPU7            9231129287   instructions             0.79  insn per cycle       (58.3        ###
+CPU4            1504173237   branches               167.308 M/sec                (58.3           
+CPU5            1670610408   branches               185.821 M/sec                (58.3           
+CPU6            1337425082   branches               148.761 M/sec                (58.3           
+CPU7            1348608526   branches               150.005 M/sec                (58.3           
+CPU4             133720998   branch-misses            8.89% of all branche       (58.3           
+CPU5             131101412   branch-misses            8.72% of all branche       (58.3           
+CPU6             133348454   branch-misses            8.87% of all branche       (58.3           
+CPU7             133198451   branch-misses            8.86% of all branche       (58.3           
+CPU4            2866532095   L1-dcache-loads        318.842 M/sec                (58.4           
+CPU5            2998631296   L1-dcache-loads        333.535 M/sec                (58.4           
+CPU6            2702820099   L1-dcache-loads        300.632 M/sec                (58.4           
+CPU7            2708312971   L1-dcache-loads        301.243 M/sec                (58.4           
+CPU4               4091043   L1-dcache-load-miss      0.14% of all L1-dcacits    (58.4           
+CPU5               4631364   L1-dcache-load-miss      0.16% of all L1-dcacits    (58.4           
+CPU6               3669129   L1-dcache-load-miss      0.13% of all L1-dcacits    (58.4           
+CPU7               3623718   L1-dcache-load-miss      0.13% of all L1-dcacits    (58.4           
+CPU4               9537613   LLC-loads                1.061 M/sec                (58.4           
+CPU5              10774169   LLC-loads                1.198 M/sec                (58.4           
+CPU6               6586014   LLC-loads                0.733 M/sec                (58.4           
+CPU7               6054066   LLC-loads                0.673 M/sec                (58.4           
+CPU4                618164   LLC-load-misses          0.03% of all LL-cachts     (50.0           
+CPU5                619759   LLC-load-misses          0.03% of all LL-cachts     (50.0           
+CPU6                542954   LLC-load-misses          0.03% of all LL-cachts     (50.0           
+CPU7                453330   LLC-load-misses          0.03% of all LL-cachts     (50.0           
+CPU4            3582995567   L1-icache-loads        398.533 M/sec                (49.9           
+CPU5            3645058869   L1-icache-loads        405.437 M/sec                (49.9           
+CPU6            3385685537   L1-icache-loads        376.587 M/sec                (49.9           
+CPU7            3331660627   L1-icache-loads        370.578 M/sec                (49.9           
+CPU4               2290782   L1-icache-load-miss                                 (49.9           
+CPU5               2035979   L1-icache-load-miss                                 (49.9           
+CPU6               1046743   L1-icache-load-miss                                 (49.9           
+CPU7                662221   L1-icache-load-miss                                 (49.9           
+CPU4               1446801   dTLB-load-misses                                    (49.9           
+CPU5               1772863   dTLB-load-misses                                    (49.9           
+CPU6                424674   dTLB-load-misses                                    (49.9           
+CPU7                331284   dTLB-load-misses                                    (49.9           
+CPU4               1081341   iTLB-load-misses                                    (49.9           
+CPU5               1286545   iTLB-load-misses                                    (49.9           
+CPU6                283886   iTLB-load-misses                                    (49.9           
+CPU7                210064   iTLB-load-misses                                    (49.9           
+                                                                                                 
+       8.990972961 secondsme elapsed                                                             

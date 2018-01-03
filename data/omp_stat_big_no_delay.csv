@@ -1,0 +1,71 @@
+# started on Tue Dec 12 02:07 2017                                                    
+                                                                                      
+RUN W                                                                                 
+ Performance counter statsr 'CPU(s) 4-7':                                             
+                                                                                      
+CPU4            2898.24728   cpu-clock (msec)         0.326 CPUs utilized             
+CPU5           2898.228488   cpu-clock (msec)         0.326 CPUs utilized             
+CPU6           2898.217032   cpu-clock (msec)         0.326 CPUs utilized             
+CPU7           2898.206614   cpu-clock (msec)         0.326 CPUs utilized             
+CPU4                   205   context-switches         0.071 K/sec                     
+CPU5                   207   context-switches         0.071 K/sec                     
+CPU6                   144   context-switches         0.050 K/sec                     
+CPU7                   291   context-switches         0.100 K/sec                     
+CPU4                     1   cpu-migrations           0.000 K/sec                     
+CPU5                     6   cpu-migrations           0.002 K/sec                     
+CPU6                     2   cpu-migrations           0.001 K/sec                     
+CPU7                     1   cpu-migrations           0.000 K/sec                     
+CPU4                   351   page-faults              0.121 K/sec                     
+CPU5                   355   page-faults              0.122 K/sec                     
+CPU6                   375   page-faults              0.129 K/sec                     
+CPU7                   347   page-faults              0.120 K/sec                     
+CPU4            4808243074   cycles                   1.659 GHz                  (58.1
+CPU5            4790566630   cycles                   1.653 GHz                  (58.1
+CPU6            4790472915   cycles                   1.653 GHz                  (58.1
+CPU7            4790150717   cycles                   1.653 GHz                  (58.1
+CPU4            5848511047   instructions             1.22  insn per cycle       (58.2        ###
+CPU5            5535486196   instructions             1.15  insn per cycle       (58.2        ###
+CPU6            5480860279   instructions             1.14  insn per cycle       (58.2        ###
+CPU7            5530848022   instructions             1.15  insn per cycle       (58.2        ###
+CPU4             878436705   branches               303.092 M/sec                (58.4
+CPU5             810635769   branches               279.699 M/sec                (58.4
+CPU6             796987223   branches               274.989 M/sec                (58.4
+CPU7             808871702   branches               279.090 M/sec                (58.4
+CPU4              75844552   branch-misses            8.63% of all branche       (58.5
+CPU5              79019911   branch-misses            9.00% of all branche       (58.5
+CPU6              79460268   branch-misses            9.05% of all branche       (58.5
+CPU7              79111441   branch-misses            9.01% of all branche       (58.5
+CPU4            1669570929   L1-dcache-loads        576.062 M/sec                (58.5
+CPU5            1625079713   L1-dcache-loads        560.711 M/sec                (58.5
+CPU6            1618889298   L1-dcache-loads        558.575 M/sec                (58.5
+CPU7            1623786929   L1-dcache-loads        560.265 M/sec                (58.5
+CPU4               2395303   L1-dcache-load-miss      0.14% of all L1-dcacits    (58.5
+CPU5               2134709   L1-dcache-load-miss      0.13% of all L1-dcacits    (58.5
+CPU6               2188858   L1-dcache-load-miss      0.13% of all L1-dcacits    (58.5
+CPU7               2199495   L1-dcache-load-miss      0.13% of all L1-dcacits    (58.5
+CPU4               4029164   LLC-loads                1.390 M/sec                (58.5
+CPU5               3469983   LLC-loads                1.197 M/sec                (58.5
+CPU6               3676776   LLC-loads                1.269 M/sec                (58.5
+CPU7               3577663   LLC-loads                1.234 M/sec                (58.5
+CPU4                292849   LLC-load-misses          0.03% of all LL-cachts     (50.0
+CPU5                269155   LLC-load-misses          0.03% of all LL-cachts     (50.0
+CPU6                309073   LLC-load-misses          0.03% of all LL-cachts     (50.0
+CPU7                279084   LLC-load-misses          0.03% of all LL-cachts     (50.0
+CPU4            1980843483   L1-icache-loads        683.463 M/sec                (49.9
+CPU5            2020576280   L1-icache-loads        697.172 M/sec                (49.9
+CPU6            2009392177   L1-icache-loads        693.313 M/sec                (49.9
+CPU7            2009665873   L1-icache-loads        693.407 M/sec                (49.9
+CPU4                444804   L1-icache-load-miss                                 (49.7
+CPU5                301146   L1-icache-load-miss                                 (49.7
+CPU6                392224   L1-icache-load-miss                                 (49.7
+CPU7                320673   L1-icache-load-miss                                 (49.7
+CPU4                203876   dTLB-load-misses                                    (49.7
+CPU5                167191   dTLB-load-misses                                    (49.7
+CPU6                193749   dTLB-load-misses                                    (49.7
+CPU7                166114   dTLB-load-misses                                    (49.7
+CPU4                118339   iTLB-load-misses                                    (49.7
+CPU5                 99305   iTLB-load-misses                                    (49.7
+CPU6                120104   iTLB-load-misses                                    (49.7
+CPU7                105537   iTLB-load-misses                                    (49.7
+                                                                                      
+       8.899222475 secondsme elapsed                                                  

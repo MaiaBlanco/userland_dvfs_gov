@@ -10,8 +10,6 @@ import sys
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
-	
-
 
 def getTelnetPower(SP2_tel, last_power):
 	# Get the latest data available from the telnet connection 
@@ -35,8 +33,9 @@ DELAY=0.2
 board_power = 1.71
 peripheral_power = 0.072 + 0.472 + board_power
 out_file = None
+MAX_SAMPLES = 110000
 
-header = "time watts w_leak w_dyn w_periph usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem"# volts_little_cluster volts_big_cluster volts_gpu volts_mem"
+header = "time watts w_leak w_dyn w_periph usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem, volts_little_cluster volts_big_cluster volts_gpu volts_mem"
 header = "\t".join( header.split(' ') )
 
 def usage():
@@ -76,7 +75,9 @@ if __name__ == "__main__":
 		connected = False
 	time_stamp = time.time()
 	total_power = 0.0
-	while True:	
+	samples_taken = 0
+	while True and samples_taken < MAX_SAMPLES:	
+		samples_taken += 1
 		last_time = time.time()#time_stamp
 		temps = cpu_usage.getTemps()
 		# Set temperatures for the small, big, gpu and memory. Convert to kelvin
@@ -125,8 +126,8 @@ if __name__ == "__main__":
 			usages[0], usages[1], usages[2], usages[3], \
 			usages[4], usages[5], usages[6], usages[7],\
 			temps[0], temps[1], temps[2], temps[3], temps[4], \
-			F[0], F[1], F[2], F[3]#,
-			#V[0], V[1], V[2], V[3],
+			F[0], F[1], F[2], F[3],
+			V[0], V[1], V[2], V[3],
 			)
 		#print(out_ln)
 		if not out_file is None:
