@@ -14,7 +14,7 @@ import atexit
 import psutil
 import random
 
-REFRESH_PERIOD = 30
+REFRESH_PERIOD = 60
 
 def usage():
 	print("USAGE: {} cluster,numbers,separated,by,commas", sys.argv[0])
