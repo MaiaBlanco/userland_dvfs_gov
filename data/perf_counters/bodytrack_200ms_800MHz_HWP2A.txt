@@ -1,0 +1,32 @@
+# started on Wed Jan 10 21:24:38 2018
+
+
+ Performance counter stats for 'system wide':
+
+CPU4       199,724,943,915      cycles                                                      
+CPU5       211,692,891,763      cycles                                                      
+CPU6       195,293,604,452      cycles                                                      
+CPU7       194,931,170,579      cycles                                                      
+CPU4       209,268,705,163      instructions              #    1.05  insn per cycle         
+CPU5       220,674,651,352      instructions              #    1.10  insn per cycle         
+CPU6       209,385,515,498      instructions              #    1.05  insn per cycle         
+CPU7       211,549,547,286      instructions              #    1.06  insn per cycle         
+CPU4               130,235      page-faults                                                 
+CPU5               286,450      page-faults                                                 
+CPU6               112,883      page-faults                                                 
+CPU7                94,490      page-faults                                                 
+CPU4            22,614,417      LLC-load-misses                                             
+CPU5            41,448,986      LLC-load-misses                                             
+CPU6            21,975,200      LLC-load-misses                                             
+CPU7            17,148,271      LLC-load-misses                                             
+CPU4           257,375,027      branch-misses             #    1.38% of all branches        
+CPU5           263,959,441      branch-misses             #    1.42% of all branches        
+CPU6           251,446,768      branch-misses             #    1.35% of all branches        
+CPU7           238,525,286      branch-misses             #    1.28% of all branches        
+CPU4        18,589,093,007      branches                                                    
+CPU5        18,425,117,770      branches                                                    
+CPU6        18,403,197,810      branches                                                    
+CPU7        18,548,059,680      branches                                                    
+
+     303.718786073 seconds time elapsed
+
