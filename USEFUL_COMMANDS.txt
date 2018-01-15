@@ -1,0 +1,9 @@
+dhclient eth0 -v
+date +%Y%m%d -s "20120418"
+#download PARSEC benchmark:
+cd /tmp
+wget http://parsec.cs.princeton.edu/download/3.0/parsec-3.0.tar.gz
+tar -xzf parsec-3.0.tar.gz
+cd parsec-3.0
+# connect to wifi:
+sudo nmcli dev wifi connect SP2_4 password 12345678
