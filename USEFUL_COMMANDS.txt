@@ -7,3 +7,5 @@ tar -xzf parsec-3.0.tar.gz
 cd parsec-3.0
 # connect to wifi:
 sudo nmcli dev wifi connect SP2_4 password 12345678
+# for stuff to build kernel:
+sudo apt-get install build-essential libqt4-dev libncurses5-dev git
