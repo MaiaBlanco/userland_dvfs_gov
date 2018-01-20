@@ -61,18 +61,18 @@ def getCpuLoad(n=None, interval=INTERVAL):
 			return (load if load > 0.001 else 0)
 
 def getAvailFreqs(cpu_num):
-	cluster = (cpu_num//4) * 4
+	cluster = (cpu_num//4)
 	if cluster == 0:
-		freqs = open(sysfs.little_cluster_freq_range.read().strip().split(' '))
+		freqs = open(sysfs.little_cluster_freq_range, 'r').read().strip().split(' ')
 	elif cluster == 1:
-		freqs = open(sysfs.big_cluster_freq_range.read().strip().split(' '))
+		freqs = open(sysfs.big_cluster_freq_range, 'r').read().strip().split(' ')
 	else:
-		print("This cluster doesn't exist!")
+		print("This cluster ({}) doesn't exist!".format(cluster))
 		return None
 	return [int(f.strip()) for f in freqs]
 
 def getClusterUsage(cluster_num):
-	cluster_num %= 4
+	cluster_num = cluster_num % 4
 	cluster_num *= 4
 	print("Looking in cpu {}".format(cluster_num))
 	with open(sysfs.fn_cpu_cluster.format(cluster_num),'r') as affected_cpus:
@@ -85,7 +85,7 @@ def getClusterUsage(cluster_num):
 		
 def setUserSpace(clusters=None):
 	global prev_govs
-	print("Setting userspace")
+	print("Setting performance")
 	if clusters is None:
 		clusters = [0, 4]
 	elif type(clusters) is int:
@@ -96,7 +96,7 @@ def setUserSpace(clusters=None):
 	else:
 		clusters = [(x%4)*4 for x in clusters]
 	print("Using CPUs {}".format(clusters))
-	prev_govs = ['powersave'] * (sorted(clusters)[-1] + 1)
+	prev_govs = ['performance'] * (sorted(clusters)[-1] + 1)
 	for i in clusters:
 		if i != 0 and i != 4:
 			print("ERROR: {} is not a valid cluster number! Integers 0 and 4 are valid.".format(i))
@@ -104,8 +104,8 @@ def setUserSpace(clusters=None):
 		with open(sysfs.fn_cpu_governor.format(i), 'r') as f:
 			prev_govs[i] = f.readline().strip()
 		with open(sysfs.fn_cpu_governor.format(i), 'w') as f:
-			f.write('userspace')
-			f.flush()
+			f.write('performance')
+			f.flush()	
 
 def unsetUserSpace(clusters=None):
 	global prev_govs
@@ -125,6 +125,7 @@ def unsetUserSpace(clusters=None):
 			sys.exit(1)
 		with open(sysfs.fn_cpu_governor.format(i), 'w') as f:
 			f.write(prev_govs[i])
+		setClusterFreq(i, getAvailFreqs(i)[-1] )
 	
 
 def getClusterFreq(cluster_num):
@@ -135,15 +136,25 @@ def getClusterFreq(cluster_num):
 	
 # Accepts frequency in khz as int or string
 def setClusterFreq(cluster_num, frequency):
-	cluster_num = (cluster_num % 4) * 4
-	print("using cpu {}".format(cluster_num))
-	with open(sysfs.fn_cpu_freq_set.format(cluster_num), 'w') as f:
+	if cluster_num > 1:
+		cluster_num = cluster_num // 4
+	#cluster_num = (cluster_num % 4) * 4
+	print("using cluster {}".format(cluster_num))
+	if cluster_num == 0:
+		cluster_max_freq = sysfs.little_cluster_max
+	elif cluster_num == 1:
+		cluster_max_freq = sysfs.big_cluster_max
+	else:
+		print("ERROR: invalid cluster number!")
+		return None
+	with open(cluster_max_freq, 'w') as f:
 		# todo: add bounds checking
 		f.write(str(frequency))	
+		f.flush()
 
 def getGPUFreq():
 	with open(sysfs.gpu_freq, 'r') as f:
-		return int(f.read().strip()) 
+		return int(f.read().strip()) * 1000 
 
 def getMemFreq():
 	with open(sysfs.mem_freq, 'r') as f:
