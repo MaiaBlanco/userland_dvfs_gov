@@ -66,3 +66,10 @@ mem_voltage_base="/sys/devices/12ca0000.hsi2c/i2c-0/0-0066/s2mps11-pmic/regulato
 mem_micro_volts = mem_voltage_base + 'microvolts'
 gpu_max_micro_volts = mem_voltage_base+"max_microvolts"
 gpu_min_micro_volts = mem_voltage_base+"min_microvolts"
+
+
+# Paths for power:
+big_cluster_power = "/sys/bus/i2c/devices/3-0040/sensor_W"
+little_cluster_power = "/sys/bus/i2c/devices/3-0045/sensor_W"
+gpu_power = "/sys/bus/i2c/devices/3-0044/sensor_W"
+mem_power = "/sys/bus/i2c/devices/3-0041/sensor_W"

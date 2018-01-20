@@ -4,7 +4,7 @@ Copyright: Carnegie Mellon University
 Date: Dec 2017
 '''
 import sys
-import cpu_usage_xu3 as sysfs_utils
+import cpu_usage as sysfs_utils
 import time
 import os
 import sysfs_paths_xu3 as sysfs

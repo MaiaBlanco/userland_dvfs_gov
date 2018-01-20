@@ -27,6 +27,20 @@ INTERVAL = 0.15
 prev_govs = list()
 times = None
 
+# Return the power for the big cluster, little cluster, gpu, and memory
+def getPowerComponents():
+	p_vals = []
+	with open(sysfs.big_cluster_power, 'r') as pf:
+		p_vals.append( float(pf.read()) )
+	with open(sysfs.little_cluster_power, 'r') as pf:
+		p_vals.append( float(pf.read()) )
+	with open(sysfs.gpu_power, 'r') as pf:
+		p_vals.append( float(pf.read()) )
+	with open(sysfs.mem_power, 'r') as pf:
+		p_vals.append( float(pf.read()) )
+	return p_vals
+	
+
 
 def getCpuLoad(n=None, interval=INTERVAL):
 	"""
@@ -95,7 +109,7 @@ def setUserSpace(clusters=None):
 		sys.exit(1)
 	else:
 		clusters = [(x%4)*4 for x in clusters]
-	print("Using CPUs {}".format(clusters))
+	#print("Using CPUs {}".format(clusters))
 	prev_govs = ['performance'] * (sorted(clusters)[-1] + 1)
 	for i in clusters:
 		if i != 0 and i != 4:
@@ -118,7 +132,7 @@ def unsetUserSpace(clusters=None):
 		sys.exit(1)
 	else:
 		clusters = [(x%4)*4 for x in clusters]
-	print("Using CPUs {}".format(clusters))
+	#print("Using CPUs {}".format(clusters))
 	for i in clusters:
 		if i != 0 and i != 4:
 			print("ERROR: {} is not a valid cluster number! Integers 0 and 4 are valid.".format(i))
@@ -130,7 +144,7 @@ def unsetUserSpace(clusters=None):
 
 def getClusterFreq(cluster_num):
 	cluster_num = (cluster_num % 4) * 4
-	print("using cpu {}".format(cluster_num))
+	#print("using cpu {}".format(cluster_num))
 	with open(sysfs.fn_cpu_freq_read.format(cluster_num), 'r') as f:
 		return int(f.read().strip())
 	
@@ -139,7 +153,7 @@ def setClusterFreq(cluster_num, frequency):
 	if cluster_num > 1:
 		cluster_num = cluster_num // 4
 	#cluster_num = (cluster_num % 4) * 4
-	print("using cluster {}".format(cluster_num))
+	#print("using cluster {}".format(cluster_num))
 	if cluster_num == 0:
 		cluster_max_freq = sysfs.little_cluster_max
 	elif cluster_num == 1:
