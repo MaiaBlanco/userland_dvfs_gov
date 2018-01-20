@@ -7,7 +7,5 @@ tar -xzf parsec-3.0.tar.gz
 cd parsec-3.0
 # connect to wifi:
 sudo nmcli dev wifi connect SP2_4 password 12345678
-
-
-sudo apt-get install tmux htop telnet build-essential PERF python-pip?
+sudo apt-get install tmux htop telnet build-essential libqt4-dev libncurses5-dev git PERF python-pip?
 sudo -H pip install psutil telnetlib
