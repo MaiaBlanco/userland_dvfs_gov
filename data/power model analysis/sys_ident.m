@@ -1,4 +1,4 @@
-SKIP_FACTOR = 3;
+SKIP_FACTOR = 2;
 data = csvread('matlab_temp_sys_identification.csv',1);
 verification_data = csvread('matlab_temp_sys_identification_verification_blackscholes.csv',1);
 v_thermal_inputs = verification_data(1:SKIP_FACTOR:end,2:5);
