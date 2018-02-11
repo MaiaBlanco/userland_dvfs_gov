@@ -18,6 +18,7 @@ cpu_usage.setClusterFreq(4, big_freqs[0])
 bi = 0
 li = 0
 up = True
+print("little_v\tlittle_f\tbig_v\tbig_f")
 while True:
 	b_freq = cpu_usage.getClusterFreq(4) 
 	l_freq = cpu_usage.getClusterFreq(0)

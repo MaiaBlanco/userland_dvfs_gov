@@ -14,11 +14,28 @@ import atexit
 import psutil
 import random
 
-REFRESH_PERIOD = 30
+REFRESH_PERIOD = 60
 
 def usage():
 	print("USAGE: {} cluster,numbers,separated,by,commas", sys.argv[0])
 	sys.exit(1)
+
+
+class RandomGovernor:
+	def __init__(self, clusters=[0,4]):
+		self.clusters = clusters
+		sysfs_utils.setUserSpace(clusters=clusters)
+		self.avail_freqs = {x:list() for x in clusters}
+		self.sel_cluster_freq = {x:0 for x in clusters}
+		for cluster in clusters:
+			self.avail_freqs[cluster] = sysfs_utils.getAvailFreqs(cluster)
+
+	def tick(self):
+		for cluster in self.clusters:
+			self.sel_cluster_freq[cluster] = random.randint(0, \
+								len(self.avail_freqs[cluster])-1 )
+			sysfs_utils.setClusterFreq(cluster, \
+								self.avail_freqs[cluster][self.sel_cluster_freq[cluster]])
 
 if __name__ == "__main__":
 	random.seed()
@@ -30,16 +47,9 @@ if __name__ == "__main__":
 			usage()
 	print("Starting random frequency governor.")
 	atexit.register(sysfs_utils.unsetUserSpace, clusters=clusters)
-	sysfs_utils.setUserSpace(clusters=clusters)
-	avail_freqs = {x:list() for x in clusters}
-	sel_cluster_freq = {x:0 for x in clusters}
-	for cluster in clusters:
-		avail_freqs[cluster] = sysfs_utils.getAvailFreqs(cluster)
+	gov = RandomGovernor(clusters=clusters)
 	while True:
 		last_time = time.time()
-		for cluster in clusters:
-			sel_cluster_freq[cluster] = random.randint(0, len(avail_freqs[cluster])-1 )
-			sysfs_utils.setClusterFreq(cluster, \
-										avail_freqs[cluster][sel_cluster_freq[cluster]])
+		gov.tick()
 		time.sleep(random.randint(0, REFRESH_PERIOD))
 
