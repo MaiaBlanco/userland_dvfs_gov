@@ -14,7 +14,7 @@ sudo echo 127.0.0.1    $new_hostname > /etc/hosts
 # Install necessary system and python (2.7) packages
 #echo performing first-time installations:
 #sudo apt-get update
-#sudo apt-get install -y python python-dev python-pip git tmux gcc linux-tools-common linux-cloud-tools-common
+#sudo apt-get install -y python python-dev python-pip git tmux gcc linux-tools-common linux-cloud-tools-common fake-hwclock
 #sudo -H pip install pyserial
 
 # Connect to assigned SP2
