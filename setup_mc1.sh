@@ -6,9 +6,12 @@ sudo hostname $new_hostname
 sudo echo $new_hostname > /etc/hostname
 sudo echo 127.0.0.1    $new_hostname > /etc/hosts 
 
+echo resizing filesystem to fill available space:
+sudo resize2fs /dev/mmcblk1p2
+
 echo performing first-time installations:
 sudo apt-get update
-sudo apt-get install -y python2.7 python2.7-dev git tmux gcc linux-tools-common linux-cloud-tools-common
+sudo apt-get install -y python python-dev python-pip git tmux gcc linux-tools-common linux-cloud-tools-common
 sudo -H pip install pyserial
 
 netname=SP2_$1
