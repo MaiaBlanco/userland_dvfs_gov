@@ -53,7 +53,7 @@ sudo nmcli dev wifi connect $netname password $pass iface wlan0
 
 # Download files for HW1
 cd ~
-wget -O files_for_students.zip -L https://cmu.box.com/shared/static/6rgm87yc5fcgcmq601cmj9lajfx3p9gl.zip
+wget -O files_for_students.zip -L https://cmu.box.com/shared/static/6i79i9hwzy2m816l48chj1qe695o15uz.zip
 mkdir /home/st1/hw1_files
 unzip -o files_for_students.zip -d /home/st1/hw1_files
 mkdir /home/st2/hw1_files
