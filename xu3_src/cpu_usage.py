@@ -86,8 +86,7 @@ def getAvailFreqs(cpu_num):
 	return [int(f.strip()) for f in freqs]
 
 def getClusterUsage(cluster_num):
-	cluster_num = cluster_num % 4
-	cluster_num *= 4
+	cluster_num = 0 if cluster_num < 4 else 4
 	print("Looking in cpu {}".format(cluster_num))
 	with open(sysfs.fn_cpu_cluster.format(cluster_num),'r') as affected_cpus:
 		cpus = [int(x) for x in affected_cpus.read().strip().strip().split(' ')]
@@ -143,7 +142,7 @@ def unsetUserSpace(clusters=None):
 	
 
 def getClusterFreq(cluster_num):
-	cluster_num = (cluster_num % 4) * 4
+	cluster_num = 0 if cluster_num < 4 else 4
 	#print("using cpu {}".format(cluster_num))
 	with open(sysfs.fn_cpu_freq_read.format(cluster_num), 'r') as f:
 		return int(f.read().strip())
