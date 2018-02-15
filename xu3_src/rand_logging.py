@@ -32,7 +32,7 @@ REFRESH=30
 out_file = None
 MAX_SAMPLES = 1000000
 
-header = "time watts w_big w_little w_gpu w_mem usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem, volts_little_cluster volts_big_cluster volts_gpu volts_mem"
+header = "time total_watts w_big w_little w_gpu w_mem usage_c0 usage_c1 usage_c2 usage_c3 usage_c4 usage_c5 usage_c6 usage_c7 temp4 temp5 temp6 temp7 temp_gpu freq_little_cluster freq_big_cluster freq_gpu freq_mem, volts_little_cluster volts_big_cluster volts_gpu volts_mem"
 header = "\t".join( header.split(' ') )
 
 def usage():
@@ -123,7 +123,7 @@ if __name__ == "__main__":
 			out_file.write("\n")
 		elapsed = time.time() - last_time
 		elapsed_sum = time.time() - start_time
-		if elapsed_sum >= REFRESH:
-			start_time = time.time()
-			gov.tick()
+		#if elapsed_sum >= REFRESH:
+		#	start_time = time.time()
+		#	#gov.tick()
 		time.sleep( max(0, DELAY - elapsed ) )	
