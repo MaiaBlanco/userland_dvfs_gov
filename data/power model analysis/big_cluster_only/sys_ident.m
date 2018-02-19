@@ -1,5 +1,5 @@
 SKIP_FACTOR = 2;    % Based on characteristic time of system
-PREDICT_HORIZON = 3;
+PREDICT_HORIZON = 2;
 data = csvread('matlab_temp_sys_identification_big_only.csv',1);
 verification_data = csvread('matlab_temp_sys_identification_verification_blackscholes_big_only.csv',1);
 v_thermal_inputs = verification_data(1:SKIP_FACTOR:end,2:5);
@@ -33,8 +33,9 @@ compare(v_time_data, mp);
 P = predict(mp, v_time_data, PREDICT_HORIZON);
 figure();
 plot(v_time_data, P);
-legend('Estimation data','Predicted data');
+legend('Verification data','Predicted data');
 
+% Perhaps this is how to get A_s and B_s as in the paper?
 A_s = mp.C*(mp.A*0.2+eye(4))*mp.C^(-1);
 A_s = A_s / norm(A_s, inf);
 B_s = mp.C * mp.B * 0.2;
@@ -51,5 +52,5 @@ predicted_validation.InputUnit = {'Watts','Watts','Watts','Watts'};
 predicted_validation.OutputUnit = {'Celcius','Celcius','Celcius','Celcius'};
 figure();
 plot(v_time_data, predicted_validation);
-legend('True data','Predicted data');
+legend('True data','Predicted data with A_s B_s Model');
 
