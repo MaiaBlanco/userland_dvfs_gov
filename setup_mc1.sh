@@ -1,3 +1,8 @@
+if [ -z "$1" ] && [ -z "$2" ]
+then
+	echo "Invalid input. <number of mc1> <password for wifi>"
+	exit 1
+fi
 number=$1
 pass=$2
 # Set the hostname for the device based on the first input arg
@@ -75,5 +80,5 @@ sudo chmod -R st2:st2 /home/st2
 #sudo chmod 700 /home/odroid 
 
 # Restart
-#echo Restarting system. See you shortly!
-#sudo reboot
+echo Restarting system. See you shortly!
+sudo reboot
