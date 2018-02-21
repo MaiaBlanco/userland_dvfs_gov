@@ -65,6 +65,7 @@ mkdir /home/st2/hw1_files
 unzip -o files_for_students.zip -d /home/st2/hw1_files
 sudo chmod -R st1:st1 /home/st1
 sudo chmod -R st2:st2 /home/st2
+sudo chmod +x /home/st*/hw1_files/parsec_files/b*
 # make sysfs accessible to all in ncps_students (using crontab so this occurs at each reboot)
 #sudo crontab -u root -l | { cat; echo "chown -R root:ncps_students /sys 2> /dev/null"; } | sudo crontab -u root
 #sudo crontab -u root -l | { cat; echo "chmod -R 775 /sys 2> /dev/null"; } | sudo crontab -u root
