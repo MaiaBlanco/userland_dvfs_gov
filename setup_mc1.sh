@@ -20,7 +20,7 @@ sudo echo 127.0.0.1    $new_hostname > /etc/hosts
 #echo performing first-time installations:
 #sudo apt-get update
 #sudo apt-get install -y python python-dev python-pip git tmux gcc linux-tools-common linux-cloud-tools-common fake-hwclock unzip
-#sudo -H pip install pyserial
+#sudo -H pip install pyserial matplotlib numpy sklearn
 
 # Connect to assigned SP2
 netname=SP2_$1
@@ -65,6 +65,7 @@ mkdir /home/st2/hw1_files
 unzip -o files_for_students.zip -d /home/st2/hw1_files
 sudo chmod -R st1:st1 /home/st1
 sudo chmod -R st2:st2 /home/st2
+sudo chmod +x /home/st*/hw1_files/parsec_files/b*
 # make sysfs accessible to all in ncps_students (using crontab so this occurs at each reboot)
 #sudo crontab -u root -l | { cat; echo "chown -R root:ncps_students /sys 2> /dev/null"; } | sudo crontab -u root
 #sudo crontab -u root -l | { cat; echo "chmod -R 775 /sys 2> /dev/null"; } | sudo crontab -u root

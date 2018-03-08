@@ -1,4 +1,3 @@
-% SKIP_FACTOR = 2;    % Based on characteristic time of system
 SKIP_FACTOR = 1;
 PREDICT_HORIZON = 3;
 base_period = 0.2;
@@ -23,7 +22,7 @@ thermal_inputs = data(1:SKIP_FACTOR:end,11:15);
 thermal_inputs_next = [thermal_inputs(2:end,:); thermal_inputs(end, :)];
 power_big_cluster_naive_split = data(1:SKIP_FACTOR:end,16:19);
 power_components = data(1:SKIP_FACTOR:end,3:6);
-% Read test data
+% Read test data:
 verification_data = csvread('xu3_power_thermal_test_blackscholes.csv',2);
 v_thermal_inputs = verification_data(1:SKIP_FACTOR:end,11:15);
 v_thermal_inputs_next = [v_thermal_inputs(2:end,:); v_thermal_inputs(end, :)];
